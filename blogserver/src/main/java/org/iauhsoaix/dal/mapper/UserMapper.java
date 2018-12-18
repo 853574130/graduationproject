@@ -1,35 +1,28 @@
 package org.iauhsoaix.dal.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.iauhsoaix.oldbean.Role;
-import org.iauhsoaix.oldbean.User;
+import org.apache.ibatis.annotations.*;
+import org.iauhsoaix.bean.UserInfo;
+import org.iauhsoaix.dal.entity.UserEntity;
+import org.iauhsoaix.utils.BasicMapper;
 
 import java.util.List;
 
-/**
- * Edited by iauhsoaix
- */
-@Mapper
-public interface UserMapper {
+public interface UserMapper_old extends BasicMapper<UserEntity> {
+	@Select("select * from user")
+	@Results(id = "userMap", value = { @Result(column = "company_id", property = "companyId"),
+			@Result(column = "user_name", property = "userName"),
+			@Result(column = "user_account", property = "userAccount"),
+			@Result(column = "employe_id", property = "employeId"),
+			@Result(column = "parent_id", property = "parentId") })
+	List<UserEntity> tt();
 
-    User loadUserByUsername(@Param("username") String username);
+	@Select("select * from user where user_account=#{account}")
+	@ResultMap("userMap")
+	UserEntity selectByAccount(String account);
 
-    long reg(User user);
+	@Update("update user set password = #{password} where id = #{id}")
+	void changePassword(@Param("id") Integer id, @Param("password") String password);
 
-    int updateUserEmail(@Param("email") String email, @Param("id") Long id);
-
-    List<User> getUserByNickname(@Param("nickname") String nickname);
-
-    List<Role> getAllRole();
-
-    int updateUserEnabled(@Param("enabled") Boolean enabled, @Param("uid") Long uid);
-
-    int deleteUserById(Long uid);
-
-    int deleteUserRolesByUid(Long id);
-
-    int setUserRoles(@Param("rids") Long[] rids, @Param("id") Long id);
-
-    User getUserById(@Param("id") Long id);
+	@Select("SELECT id FROM user WHERE employee_number = #{employeeNumber} AND company_id = #{companyId}")
+	UserInfo searchByEmployeNumber(@Param("employeeNumber") Integer employeeNumber, @Param("companyId") Integer companyId);
 }

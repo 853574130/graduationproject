@@ -1,4 +1,4 @@
-package org.iauhsoaix.controller;
+package org.iauhsoaix.controller.admin;
 
 import org.iauhsoaix.oldbean.RespBean;
 import org.iauhsoaix.service.UserService;
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Edited by iauhsoaix on 2017/12/24.
  */
-@RestController
+//@RestController
 public class UserController {
 
     @Autowired

@@ -1,103 +1,83 @@
-package org.iauhsoaix.service;
+package com.ecms.service;
 
-import org.iauhsoaix.oldbean.Role;
-import org.iauhsoaix.oldbean.User;
-import org.iauhsoaix.dal.mapper.RolesMapper;
-import org.iauhsoaix.dal.mapper.UserMapper;
-import org.iauhsoaix.utils.Util;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import com.ecms.bean.UserInfo;
+import com.ecms.common.LogCapability;
+import com.ecms.common.Pager;
+import com.ecms.dal.entity.UserEntity;
+import com.ecms.exceptions.CommonBusinessException;
+import com.ecms.manager.UserManager;
+import com.ecms.utils.ExchangeUtils;
+import com.ecms.web.filter.LoginFilter;
+import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.DigestUtils;
 
+import javax.annotation.Resource;
 import java.util.List;
 
-/**
- * Edited by iauhsoaix
- */
 @Service
-@Transactional
-public class UserService implements UserDetailsService {
-    @Autowired
-    UserMapper userMapper;
-    @Autowired
-    RolesMapper rolesMapper;
+public class UserService implements LogCapability {
 
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userMapper.loadUserByUsername(s);
-        if (user == null) {
-            //避免返回null，这里返回一个不含有任何值的User对象，在后期的密码比对过程中一样会验证失败
-            return new User();
+	private Logger logger = getLogger();
+	private static final int STATUS_DEFAULT = 0;
+	private static final int STATUS_INVALID = 10;
+	private static final String DEFAULT_PASSWORD = "123456";
+	@Resource
+	private UserManager userManager;
+
+    public UserInfo getLoginUser(String account, String password) throws CommonBusinessException {
+        UserEntity userEntity = userManager.getUserByAccount(account);
+        if (userEntity == null) {
+            throw new CommonBusinessException("用户账号不存在");
+        } else if (!userEntity.getPassword().equals(password)) {
+            throw new CommonBusinessException("密码错误");
+        } else if (userEntity.getStatus() > 0) {
+            throw new CommonBusinessException("用户已失效");
         }
-        //查询用户的角色信息，并返回存入user中
-        List<Role> roles = rolesMapper.getRolesByUid(user.getId());
-        //权限不写在user表中，想法非常好
-        user.setRoles(roles);
-        return user;
+        return ExchangeUtils.exchangeObject(userEntity, UserInfo.class);
     }
 
-    /**
-     * @param user
-     * @return 0表示成功
-     * 1表示用户名重复
-     * 2表示失败
-     */
-    public int reg(User user) {
-        User loadUserByUsername = userMapper.loadUserByUsername(user.getUsername());
-        if (loadUserByUsername != null) {
-            return 1;
-        }
-        //插入用户,插入之前先对密码进行加密
-        user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
-        user.setEnabled(true);//用户可用
-        
-        long result = userMapper.reg(user);
-        //返回用户id
-        //配置用户的角色，默认都是普通用户（2），管理员（1）
-        String[] roles = new String[]{"2"};
-        
-        System.out.println("我来过这里吗");
-        int i = rolesMapper.addRoles(roles, user.getId());
-        System.out.println(i);
-        boolean b = i == roles.length && result == 1;
-        if (b) {
-            return 0;
-        } else {
-            return 2;
-        }
-    }
+	public Pager<UserInfo> getUserList(int pageNum, int pageSize, UserInfo userInfo) {
+		UserEntity userEntity = ExchangeUtils.exchangeObject(userInfo, UserEntity.class);
+		userEntity.setCompanyId(LoginFilter.getCurrentUser().getCompanyId());
+		List<UserEntity> list = userManager.getUserList(pageNum, pageSize, userEntity);
+		long total = userManager.getTotal(userEntity);
+		List<UserInfo> userList = ExchangeUtils.exchangeList(list, UserInfo.class);
+		Pager<UserInfo> pager = new Pager<UserInfo>(pageNum, pageSize, total, userList);
+		return pager;
+	}
 
-    public int updateUserEmail(String email) {
-        return userMapper.updateUserEmail(email, Util.getCurrentUser().getId());
-    }
+	public void insertUser(UserInfo userInfo) {
+		List<Integer> list = userInfo.getCheckList();
+		if (!CollectionUtils.isEmpty(userInfo.getCheckList())) {
+			int role = list.get(0);
+			for (Integer value : userInfo.getCheckList()) {
+				role = role | value;
+			}
+			userInfo.setRole(role);
+		}
+		UserEntity userEntity = ExchangeUtils.exchangeObject(userInfo, UserEntity.class);
+		UserInfo currentUser = LoginFilter.getCurrentUser();
+		userEntity.setUserAccount(currentUser.getUserAccount() + "." + userInfo.getUserAccount());
+		userEntity.setPassword(DEFAULT_PASSWORD);
+		userEntity.setCompanyId(currentUser.getCompanyId());
+		userEntity.setParentId(currentUser.getId());
+		userManager.insertUser(userEntity);
+	}
 
-    public List<User> getUserByNickname(String nickname) {
-        List<User> list = userMapper.getUserByNickname(nickname);
-        return list;
-    }
+	public void updateStatus(int id, int status) {
+		UserEntity userEntity = new UserEntity();
+		userEntity.setId(id);
+		userEntity.setStatus(status == STATUS_DEFAULT ? STATUS_INVALID : STATUS_DEFAULT);
+		userManager.updateByPrimaryKeySelective(userEntity);
+	}
 
-    public List<Role> getAllRole() {
-        return userMapper.getAllRole();
-    }
+	public void changePassword(Integer id,String password){
+    	userManager.changePassword(id,password);
+	}
 
-    public int updateUserEnabled(Boolean enabled, Long uid) {
-        return userMapper.updateUserEnabled(enabled, uid);
-    }
+	public UserInfo searchByEmployeNumber(Integer employeeNumber,Integer companyId){
+    	return userManager.searchByEmployeNumber(employeeNumber,companyId);
+	}
 
-    public int deleteUserById(Long uid) {
-        return userMapper.deleteUserById(uid);
-    }
-
-    public int updateUserRoles(Long[] rids, Long id) {
-        int i = userMapper.deleteUserRolesByUid(id);
-        return userMapper.setUserRoles(rids, id);
-    }
-
-    public User getUserById(Long id) {
-        return userMapper.getUserById(id);
-    }
 }

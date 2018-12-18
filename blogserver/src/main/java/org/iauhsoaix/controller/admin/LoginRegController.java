@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Edited by iauhsoaix
  */
-@RestController
+//@RestController
 public class LoginRegController {
 
     @Autowired
