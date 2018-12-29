@@ -1,11 +1,12 @@
-package com.ecms.web.filter;
+package org.iauhsoaix.filter;
 
-import com.ecms.bean.UserInfo;
-import com.ecms.common.Constants;
-import com.ecms.common.LogCapability;
-import com.ecms.utils.ResultUtils;
+
 import net.sf.json.JSONObject;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
+import org.iauhsoaix.bean.UserInfo;
+import org.iauhsoaix.utils.Constant;
+import org.iauhsoaix.utils.LogCapability;
+import org.iauhsoaix.utils.ResultUtils;
 import org.slf4j.Logger;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
@@ -41,28 +42,33 @@ public class LoginFilter implements Filter, LogCapability {
 		if (!uri.contains("/login") && !uri.contains("/appLogin")) {
 			try {
 				UserInfo userInfo = null;
-				String token = request.getHeader(Constants.APP_HEADER_NAME);
+				String token = request.getHeader(Constant.APP_HEADER_NAME);
 				if (StringUtils.isNotBlank(token)) {
 					String value = stringRedisTemplate.opsForValue().get(token);
 					if (StringUtils.isNotBlank(value)) {
 						userInfo = (UserInfo) JSONObject.toBean(JSONObject.fromObject(value), UserInfo.class);
 					}
 				} else {
+					//上面是移动端登录，这是web端
 					userInfo = (UserInfo) request.getSession().getAttribute(USER_SESSION);
 				}
 				if (userInfo == null) {
 					String originHeader = request.getHeader("Origin");
+					//
 					HttpServletResponse response = (HttpServletResponse) servletResponse;
 					response.reset();
+
 					response.setHeader("Access-Control-Allow-Origin", originHeader);
 					response.setHeader("Access-Control-Allow-Credentials", "true");
 					response.setContentType("application/json;charset=utf-8");
 					response.setHeader("Access-Control-Allow-Headers", "Content-Type,Access-Token");
+					//这里是干嘛？
 					PrintWriter writer = response.getWriter();
 					writer.write(getNoLoginMsg());
 					writer.flush();
 					writer.close();
 					return;
+//					用户为空应该就是输出错误信息
 				} else {
 					user.set(userInfo);
 				}
@@ -82,6 +88,7 @@ public class LoginFilter implements Filter, LogCapability {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("success", false);
 		jsonObject.put("code", ResultUtils.CODE_NOLOGIN);
+		jsonObject.put("msg", "兄dei，你没登录啊");
 		return jsonObject.toString();
 	}
 

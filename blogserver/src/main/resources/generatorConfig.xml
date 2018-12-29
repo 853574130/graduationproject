@@ -43,7 +43,7 @@
         </javaModelGenerator>
 
         <!-- *Mapper.xml 文件的位置 -->
-        <sqlMapGenerator targetPackage="org.iauhsoaix.test" targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="org.iauhsoaix.dustbin" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
@@ -56,16 +56,94 @@
         <!--tableName:指定了表名
             domainObjectName:指定了实体类的名称
         -->
-        <table tableName="article" domainObjectName="article" enableCountByExample="false"
+        <!--<table tableName="article" domainObjectName="ArticleInfo" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="rootClass" value="org.iauhsoaix.bean.BaseInfo"/>-->
+            <!--<columnOverride column="mdContent" javaType="java.lang.String" jdbcType="VARCHAR"></columnOverride>-->
+            <!--<columnOverride column="htmlContent" jdbcType="VARCHAR" javaType="java.lang.String"></columnOverride>-->
+            <!--<columnOverride column="summary" jdbcType="VARCHAR" javaType="java.lang.String"></columnOverride>-->
+            <!--<ignoreColumn column="id"></ignoreColumn>-->
+            <!--<ignoreColumn column="created"></ignoreColumn>-->
+            <!--<ignoreColumn column="updated"></ignoreColumn>-->
+
+        <!--</table>-->
+
+        <!--<table tableName="article_tags" domainObjectName="ArticleTagInfo" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="rootClass" value="org.iauhsoaix.bean.BaseInfo"/>-->
+            <!--<ignoreColumn column="id"></ignoreColumn>-->
+            <!--<ignoreColumn column="created"></ignoreColumn>-->
+            <!--<ignoreColumn column="updated"></ignoreColumn>-->
+        <!--</table>-->
+        <!--<table tableName="attach" domainObjectName="AttachInfo" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="rootClass" value="org.iauhsoaix.bean.BaseInfo"/>-->
+            <!--<ignoreColumn column="id"></ignoreColumn>-->
+            <!--<ignoreColumn column="created"></ignoreColumn>-->
+            <!--<ignoreColumn column="updated"></ignoreColumn>-->
+        <!--</table>-->
+        <!--<table tableName="category" domainObjectName="CategoryInfo" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="rootClass" value="org.iauhsoaix.bean.BaseInfo"/>-->
+            <!--<ignoreColumn column="id"></ignoreColumn>-->
+            <!--<ignoreColumn column="created"></ignoreColumn>-->
+            <!--<ignoreColumn column="updated"></ignoreColumn>-->
+        <!--</table>-->
+        <!--<table tableName="comments" domainObjectName="CommentsInfo" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="rootClass" value="org.iauhsoaix.bean.BaseInfo"/>-->
+            <!--<ignoreColumn column="id"></ignoreColumn>-->
+            <!--<ignoreColumn column="created"></ignoreColumn>-->
+            <!--<ignoreColumn column="updated"></ignoreColumn>-->
+        <!--</table>-->
+        <!--<table tableName="log" domainObjectName="LogInfo" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="rootClass" value="org.iauhsoaix.bean.BaseInfo"/>-->
+            <!--<ignoreColumn column="id"></ignoreColumn>-->
+            <!--<ignoreColumn column="created"></ignoreColumn>-->
+            <!--<ignoreColumn column="updated"></ignoreColumn>-->
+        <!--</table>-->
+        <!--<table tableName="roles" domainObjectName="RoleInfo" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="rootClass" value="org.iauhsoaix.bean.BaseInfo"/>-->
+            <!--<ignoreColumn column="id"></ignoreColumn>-->
+            <!--<ignoreColumn column="created"></ignoreColumn>-->
+            <!--<ignoreColumn column="updated"></ignoreColumn>-->
+        <!--</table>-->
+
+        <!--<table tableName="roles_user" domainObjectName="RoleUserInfo" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="rootClass" value="org.iauhsoaix.bean.BaseInfo"/>-->
+            <!--<ignoreColumn column="id"></ignoreColumn>-->
+            <!--<ignoreColumn column="created"></ignoreColumn>-->
+            <!--<ignoreColumn column="updated"></ignoreColumn>-->
+        <!--</table>-->
+        <table tableName="user" domainObjectName="UserInfo" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false">
-            <columnOverride column="mdContent" jdbcType="VARCHAR"></columnOverride>
-            <columnOverride column="htmlContent" jdbcType="VARCHAR"></columnOverride>
-            <columnOverride column="summary" jdbcType="VARCHAR"></columnOverride>
-
-
+            <property name="rootClass" value="org.iauhsoaix.bean.BaseInfo"/>
+            <ignoreColumn column="id"></ignoreColumn>
+            <ignoreColumn column="created"></ignoreColumn>
+            <ignoreColumn column="updated"></ignoreColumn>
         </table>
 
     </context>
 </generatorConfiguration>
+<!--set global time_zone='+8:00';-->

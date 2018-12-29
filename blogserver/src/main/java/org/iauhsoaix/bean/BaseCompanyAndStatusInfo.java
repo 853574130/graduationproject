@@ -1,4 +1,4 @@
-package org.iauhsoaix.oldbean;
+package org.iauhsoaix.bean;
 
 /**
  * @Description 继承于BaseInfo的二层基类，基于记录需要状态字段以及相关的公司id

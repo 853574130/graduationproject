@@ -11,7 +11,7 @@ import java.util.List;
  * Edited by iauhsoaix
  */
 @Mapper
-public interface UserMapper {
+public interface UserMapper_olde {
 
     User loadUserByUsername(@Param("username") String username);
 

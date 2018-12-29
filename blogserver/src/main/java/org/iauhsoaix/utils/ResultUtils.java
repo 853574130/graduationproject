@@ -1,6 +1,4 @@
-package com.ecms.utils;
-
-import com.ecms.common.Result;
+package org.iauhsoaix.utils;
 
 public class ResultUtils {
 

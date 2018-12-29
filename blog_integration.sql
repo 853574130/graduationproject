@@ -69,7 +69,7 @@ CREATE TABLE `comments` (
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) DEFAULT NULL COMMENT '角色名',
+  `role_name` varchar(32) DEFAULT NULL COMMENT '角色名',
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `status` int(1) NOT NULL DEFAULT '1' COMMENT '可用状态字',
@@ -78,7 +78,7 @@ CREATE TABLE `roles` (
 DROP TABLE IF EXISTS `roles_user`;
 CREATE TABLE `roles_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_id` int(11) DEFAULT '2' COMMENT '角色名',
+  `role_id` int(11) DEFAULT '2' COMMENT '角色id',
   `user_id` int(11) DEFAULT NULL,
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -102,15 +102,17 @@ CREATE TABLE `tags` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) DEFAULT NULL COMMENT '用户名',
-  `nickname` varchar(64) DEFAULT NULL COMMENT '显示昵称',
+  `user_name` varchar(64) DEFAULT NULL COMMENT '用户名',
+  `user_account` varchar(64) DEFAULT NULL COMMENT '用户账号',
+  #`nickname` varchar(64) DEFAULT NULL COMMENT '显示昵称',
   `password` varchar(255) DEFAULT NULL COMMENT '密码',
+  `type` varchar(10) DEFAULT 0 COMMENT '类型，0普通账号，10管理员',
   #`enabled` tinyint(1) DEFAULT '1' COMMENT '日志标题',
   `email` varchar(64) DEFAULT NULL COMMENT '邮箱',
   `userface` varchar(255) DEFAULT NULL,
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `status` int(1) NOT NULL DEFAULT '1' COMMENT '评论状态，1：正常，0：禁用',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '状态，1：正常，0：禁用',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `log`;

@@ -1,12 +1,14 @@
 package org.iauhsoaix.oldbean;
 
+import org.iauhsoaix.bean.BaseInfo;
+
 import java.sql.Timestamp;
 import java.util.List;
 
 /**
  * Edited by iauhsoaix on 2018/12/20.
  */
-public class Article extends BaseInfo{
+public class Article extends BaseInfo {
     /**
      * 文章编号
      */

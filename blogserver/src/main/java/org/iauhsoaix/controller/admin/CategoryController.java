@@ -1,4 +1,4 @@
-package org.iauhsoaix.controller;
+package org.iauhsoaix.controller.admin;
 
 import org.iauhsoaix.oldbean.Category;
 import org.iauhsoaix.oldbean.RespBean;

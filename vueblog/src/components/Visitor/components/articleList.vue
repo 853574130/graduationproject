@@ -46,7 +46,7 @@
          </li>
         </ul>
 
-      <el-button @click="requestData(1)">发送请求</el-button>
+      <el-button @click="requestData(1)">发送请求游客端</el-button>
         <pagination :page-no="pageNo" :current.sync="currentPage"></pagination>
 
 
@@ -135,13 +135,38 @@
        * 给列表传个username的参数
        */
       requestData(currentPage) {
-        // let url = "/article/publicArticle";
-let url ="/admin/category/all";
-      getRequest(url).then(resp=> {
-        console.log("resp",resp);
-        if (resp.status == 200) {
+        // let url = "http://ls.fbvinc.com:8089/blogsever/article/publicArticle";
+      // let url ="/admin/category/all";
+      // console.log(this.GLOBAL.BASE_URL);
+
+
+      this.$axios.post('http://localhost:8089/article/publicArticle'
+      ).then((response) => {
+        var status = response.data;
+        if(status === 'successful') {
+          this.$router.push('/information');
+        } else {
+          alert(response.data.message);
         }
-      } );
+        console.log(response);
+      }).catch((error) => {
+        console.log(response);
+      });
+
+        // this.$axios.post("article/publicArticle")
+        // .then(function(response) {
+        //   console.log(response.data);
+        // })        
+        // .catch(function(error) {
+        //   console.log('error'+error);
+        // });
+
+
+      // getRequest(url).then(resp=> {
+      //   console.log("resp",resp);
+      //   if (resp.status == 200) {
+      //   }
+      // } );
 
       }
     },

@@ -1,5 +1,7 @@
 package org.iauhsoaix.oldbean;
 
+import org.iauhsoaix.bean.BaseInfo;
+
 /**
  * 
  * @author linlvping

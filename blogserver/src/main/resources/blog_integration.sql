@@ -126,7 +126,7 @@ DROP TABLE IF EXISTS `pageview`;
   #`status` int(1) NOT NULL DEFAULT '1' COMMENT '可用状态字',
   #PRIMARY KEY (`id`),
   #KEY `pageview_ibfk_1` (`user_id`),
-  #CONSTRAINT `pageview_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+  #CONSTRAINT `pageview_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `UserInfo` (`id`) ON DELETE CASCADE
 #) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;*/
 
 -- ----------------------------
@@ -226,7 +226,7 @@ CREATE TABLE `tags` (
 #INSERT INTO `tags` VALUES ('65', '杂谈');
 
 -- ----------------------------
--- Table structure for `user`
+-- Table structure for `UserInfo`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -244,7 +244,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of user
+-- Records of UserInfo
 -- ----------------------------
 #INSERT INTO `user` VALUES ('6', 'linghu', '令狐葱', '202cb962ac59075b964b07152d234b70', '1', 'linghu@qq.com', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920326&di=44a6fa6b597d86f475c2b15fa93008dd&imgtype=0&src=http%3A%2F%2Fwww.qqzhi.com%2Fuploadpic%2F2015-01-12%2F023019564.jpg', '2017-12-08 09:30:22');
 #INSERT INTO `user` VALUES ('7', 'sang', '江南一点雨', '202cb962ac59075b964b07152d234b70', '1', 'sang123@qq.com', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920321&di=913e88c23f382933ef430024afd9128a&imgtype=0&src=http%3A%2F%2Fp.3761.com%2Fpic%2F9771429316733.jpg', '2017-12-21 13:30:29');

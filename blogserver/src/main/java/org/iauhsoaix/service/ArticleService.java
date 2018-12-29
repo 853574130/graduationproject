@@ -1,5 +1,6 @@
 package org.iauhsoaix.service;
 
+import org.iauhsoaix.bean.ArticleInfo;
 import org.iauhsoaix.oldbean.Article;
 import org.iauhsoaix.dal.entity.ArticleEntity;
 import org.iauhsoaix.dal.mapper.ArticleMapper;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class ArticleService extends BaseService<ArticleEntity, Article> {
+public class ArticleService extends BaseService<ArticleEntity, ArticleInfo> {
     @Autowired
     ArticleMapper articleMapper;
     @Autowired

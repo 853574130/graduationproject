@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.iauhsoaix.test.CommentsInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.iauhsoaix.test.CommentsInfo" >
+    <result column="aid" property="aid" jdbcType="INTEGER" />
+    <result column="publishDate" property="publishdate" jdbcType="TIMESTAMP" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="org.iauhsoaix.test.CommentsInfo" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <insert id="insert" parameterType="org.iauhsoaix.test.CommentsInfo" >
+    insert into comments (aid, publishDate, parentId, 
+      uid, content)
+    values (#{aid,jdbcType=INTEGER}, #{publishdate,jdbcType=TIMESTAMP}, #{parentid,jdbcType=INTEGER}, 
+      #{uid,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.iauhsoaix.test.CommentsInfo" >
+    insert into comments
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aid != null" >
+        aid,
+      </if>
+      <if test="publishdate != null" >
+        publishDate,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aid != null" >
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="publishdate != null" >
+        #{publishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

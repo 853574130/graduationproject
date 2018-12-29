@@ -1,13 +1,12 @@
 package org.iauhsoaix.controller.admin;
 
 import org.iauhsoaix.oldbean.RespBean;
-import org.iauhsoaix.service.UserService;
+import org.iauhsoaix.service.UserService_old;
 import org.iauhsoaix.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -15,10 +14,10 @@ import java.util.List;
  * Edited by iauhsoaix on 2017/12/24.
  */
 //@RestController
-public class UserController {
+public class UserController_old {
 
     @Autowired
-    UserService userService;
+    UserService_old userServiceOld;
 
     @RequestMapping("/currentUserName")
     public String currentUserName() {
@@ -48,7 +47,7 @@ public class UserController {
 
     @RequestMapping(value = "/updateUserEmail",method = RequestMethod.PUT)
     public RespBean updateUserEmail(String email) {
-        if (userService.updateUserEmail(email) == 1) {
+        if (userServiceOld.updateUserEmail(email) == 1) {
             return new RespBean("success", "开启成功!");
         }
         return new RespBean("error", "开启失败!");

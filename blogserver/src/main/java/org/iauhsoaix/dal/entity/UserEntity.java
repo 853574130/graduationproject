@@ -1,25 +1,23 @@
-package com.ecms.dal.entity;
+package org.iauhsoaix.dal.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
 
 @Table(name = "user")
-public class UserEntity extends BaseCompanyAndStatusEntity {
+public class UserEntity extends AbstractEntity {
 
 	@Column(name = "user_name")
 	private String userName;
 	@Column(name = "user_account")
 	private String userAccount;
+	@Column(name = "password")
 	private String password;
-	@Column(name = "employe_id")
-	private String employeId;
-	private String department;
+	//类型，0普通账号，10管理员
 	private Integer type;
-	@Column(name = "parent_id")
-	private Integer parentId;
+//	@Column(name = "parent_id")
+//	private Integer parentId;
 	private Integer role;
-	@Column(name = "employee_number")
-	private Integer employeeNumber;
+
 
 	public String getUserName() {
 		return userName;
@@ -45,21 +43,7 @@ public class UserEntity extends BaseCompanyAndStatusEntity {
 		this.password = password;
 	}
 
-	public String getEmployeId() {
-		return employeId;
-	}
 
-	public void setEmployeId(String employeId) {
-		this.employeId = employeId;
-	}
-
-	public String getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(String department) {
-		this.department = department;
-	}
 
 	public Integer getType() {
 		return type;
@@ -69,13 +53,7 @@ public class UserEntity extends BaseCompanyAndStatusEntity {
 		this.type = type;
 	}
 
-	public Integer getParentId() {
-		return parentId;
-	}
 
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
-	}
 
 	public Integer getRole() {
 		return role;
@@ -85,11 +63,5 @@ public class UserEntity extends BaseCompanyAndStatusEntity {
 		this.role = role;
 	}
 
-	public Integer getEmployeeNumber() {
-		return employeeNumber;
-	}
 
-	public void setEmployeeNumber(Integer employeeNumber) {
-		this.employeeNumber = employeeNumber;
-	}
 }

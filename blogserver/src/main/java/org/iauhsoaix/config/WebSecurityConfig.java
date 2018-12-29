@@ -1,9 +1,8 @@
 package org.iauhsoaix.config;
 
-import org.iauhsoaix.service.UserService;
+import org.iauhsoaix.service.UserService_old;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -22,10 +21,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@Configuration
+//@Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
-	UserService userService;
+	UserService_old userServiceOld;
 
 	/**
 	 * 通过 @EnableWebMvcSecurity 注解开启Spring Security的功能 继承
@@ -45,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 * 获取默认UserDetailsService的 AuthenticationManagerBuilder。
 		 * PasswordEncoder是实现加密解密的接口
 		 */
-		auth.userDetailsService(userService).passwordEncoder(new PasswordEncoder() {
+		auth.userDetailsService(userServiceOld).passwordEncoder(new PasswordEncoder() {
 			/*
 			 * (non-Javadoc) 由我们自己调用
 			 * 

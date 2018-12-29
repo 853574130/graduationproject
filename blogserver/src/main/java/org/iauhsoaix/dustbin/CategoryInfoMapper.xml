@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.iauhsoaix.test.CategoryInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.iauhsoaix.test.CategoryInfo" >
+    <result column="cateName" property="catename" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="DATE" />
+  </resultMap>
+  <insert id="insert" parameterType="org.iauhsoaix.test.CategoryInfo" >
+    insert into category (cateName, date)
+    values (#{catename,jdbcType=VARCHAR}, #{date,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="org.iauhsoaix.test.CategoryInfo" >
+    insert into category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="catename != null" >
+        cateName,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="catename != null" >
+        #{catename,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>

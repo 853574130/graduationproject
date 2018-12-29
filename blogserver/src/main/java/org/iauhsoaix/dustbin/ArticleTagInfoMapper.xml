@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.iauhsoaix.test.ArticleTagInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.iauhsoaix.test.ArticleTagInfo" >
+    <result column="aid" property="aid" jdbcType="INTEGER" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="org.iauhsoaix.test.ArticleTagInfo" >
+    insert into article_tags (aid, tid)
+    values (#{aid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.iauhsoaix.test.ArticleTagInfo" >
+    insert into article_tags
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aid != null" >
+        aid,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aid != null" >
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

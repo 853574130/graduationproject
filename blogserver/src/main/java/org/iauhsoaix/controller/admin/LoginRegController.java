@@ -1,11 +1,10 @@
-package org.iauhsoaix.controller;
+package org.iauhsoaix.controller.admin;
 
 import org.iauhsoaix.oldbean.RespBean;
 import org.iauhsoaix.oldbean.User;
-import org.iauhsoaix.service.UserService;
+import org.iauhsoaix.service.UserService_old;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Edited by iauhsoaix
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginRegController {
 
     @Autowired
-    UserService userService;
+    UserService_old userServiceOld;
 
     @RequestMapping("/login_error")
     public RespBean loginError() {
@@ -43,7 +42,7 @@ public class LoginRegController {
 
     @RequestMapping("/reg")
     public RespBean reg(User user) {
-        int result = userService.reg(user);
+        int result = userServiceOld.reg(user);
         if (result == 0) {
             //成功
             return new RespBean("success", "注册成功!");

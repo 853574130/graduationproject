@@ -1,7 +1,7 @@
 package org.iauhsoaix.service;
 
 
-import org.iauhsoaix.oldbean.BaseInfo;
+import org.iauhsoaix.bean.BaseInfo;
 import org.iauhsoaix.dal.entity.AbstractEntity;
 import org.iauhsoaix.exceptions.CommonBusinessException;
 import org.iauhsoaix.manager.BaseManager;

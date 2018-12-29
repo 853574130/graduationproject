@@ -7,7 +7,7 @@ import org.iauhsoaix.utils.BasicMapper;
 
 import java.util.List;
 
-public interface UserMapper_old extends BasicMapper<UserEntity> {
+public interface UserMapper extends BasicMapper<UserEntity> {
 	@Select("select * from user")
 	@Results(id = "userMap", value = { @Result(column = "company_id", property = "companyId"),
 			@Result(column = "user_name", property = "userName"),

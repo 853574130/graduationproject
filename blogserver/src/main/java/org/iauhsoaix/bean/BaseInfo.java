@@ -1,4 +1,4 @@
-package org.iauhsoaix.oldbean;
+package org.iauhsoaix.bean;
  /** 
    * @Author:iauhsoaix   
    * @date 2018/12/5 

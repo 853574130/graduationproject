@@ -1,10 +1,9 @@
-package com.ecms.manager;
+package org.iauhsoaix.manager;
 
-import com.ecms.bean.UserInfo;
-import com.ecms.dal.entity.UserEntity;
-import com.ecms.dal.mapper.UserMapper;
-import com.github.pagehelper.page.PageMethod;
-
+//import com.github.pagehelper.page.PageMethod;
+import org.iauhsoaix.bean.UserInfo;
+import org.iauhsoaix.dal.entity.UserEntity;
+import org.iauhsoaix.dal.mapper.UserMapper;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -21,7 +20,7 @@ public class UserManager {
 	}
 
 	public List<UserEntity> getUserList(int pageNum, int pageSize, UserEntity userEntity) {
-		PageMethod.startPage(pageNum, pageSize);
+//		PageMethod.startPage(pageNum, pageSize);
 		return userMapper.select(userEntity);
 	}
 
@@ -41,7 +40,7 @@ public class UserManager {
 		userMapper.changePassword(id,password);
 	}
 
-	public UserInfo searchByEmployeNumber(Integer employeeNumber,Integer companyId){
+	public UserInfo searchByEmployeNumber(Integer employeeNumber, Integer companyId){
 		return userMapper.searchByEmployeNumber(employeeNumber,companyId);
 	}
 }

@@ -1,9 +1,13 @@
-package org.iauhsoaix.controller;
+package org.iauhsoaix.controller.admin;
 
 import org.apache.commons.io.IOUtils;
+import org.iauhsoaix.bean.ArticleInfo;
 import org.iauhsoaix.oldbean.Article;
 import org.iauhsoaix.oldbean.RespBean;
 import org.iauhsoaix.service.ArticleService;
+import org.iauhsoaix.utils.Pager;
+import org.iauhsoaix.utils.Result;
+import org.iauhsoaix.utils.ResultUtils;
 import org.iauhsoaix.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -84,6 +88,13 @@ public class ArticleController {
         map.put("totalCount", totalCount);
         map.put("articles", articles);
         return map;
+    }
+
+    @RequestMapping(value = "/publicArticle", method = RequestMethod.GET)
+    public Result<Pager<ArticleInfo>> visitorGetArticle() {
+        ArticleInfo search=new ArticleInfo();
+        articleService.getListBy(search);
+        return ResultUtils.success();
     }
 
 
