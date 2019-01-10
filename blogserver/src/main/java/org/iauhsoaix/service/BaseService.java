@@ -4,8 +4,10 @@ package org.iauhsoaix.service;
 import org.iauhsoaix.bean.BaseInfo;
 import org.iauhsoaix.dal.entity.AbstractEntity;
 import org.iauhsoaix.exceptions.CommonBusinessException;
+import org.iauhsoaix.filter.LoginFilter;
 import org.iauhsoaix.manager.BaseManager;
 import org.iauhsoaix.utils.ExchangeUtils;
+import org.iauhsoaix.utils.Pager;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.ParameterizedType;
@@ -27,7 +29,7 @@ public abstract class BaseService<E extends AbstractEntity, I extends BaseInfo> 
 
 //	private ThreadLocal<Condition> conditionThreadLocal = new ThreadLocal<Condition>();
 //
-	public I getModel(Integer id) {
+	public I getModel(Long id) {
 		E entity = getManager().getEntityById(id);
 		if (null == entity) {
 			throw new CommonBusinessException("记录不存在");
@@ -35,7 +37,7 @@ public abstract class BaseService<E extends AbstractEntity, I extends BaseInfo> 
 		return ExchangeUtils.exchangeObject(entity, iClass);
 	}
 //
-	public E getEntity(Integer id) {
+	public E getEntity(Long id) {
 		E entity = getManager().getEntityById(id);
 		if (null == entity) {
 			throw new CommonBusinessException("记录不存在");
@@ -107,25 +109,25 @@ public abstract class BaseService<E extends AbstractEntity, I extends BaseInfo> 
 
 
 
-//	/**
-//	 * 精确查询
-//	 * @param pageNum
-//	 * @param pageSize
-//	 * @param info
-//	 * @return
-//	 */
-//	public Pager<I> getModelList(int pageNum, int pageSize, I info) {
-//		E entity = ExchangeUtils.exchangeObject(info, eClass);
+	/**
+	 * 精确查询
+	 * @param pageNum
+	 * @param pageSize
+	 * @param info
+	 * @return
+	 */
+	public Pager<I> getModelList(int pageNum, int pageSize, I info) {
+		E entity = ExchangeUtils.exchangeObject(info, eClass);
 //		if (entity instanceof BaseCompanyAndStatusEntity) {
 //			((BaseCompanyAndStatusEntity) entity).setCompanyId(LoginFilter.getCurrentUser().getCompanyId());
 //		}
-//		List<E> list = getManager().getListBy(pageNum, pageSize, entity);
-//		long total = getManager().getTotal(entity);
-//		List<I> modelList = ExchangeUtils.exchangeList(list, iClass);
-//		setCustomProperties(modelList);
-//		Pager<I> pager = new Pager<I>(pageNum, pageSize, total, modelList);
-//		return pager;
-//	}
+		List<E> list = getManager().getListBy(pageNum, pageSize, entity);
+		long total = getManager().getTotal(entity);
+		List<I> modelList = ExchangeUtils.exchangeList(list, iClass);
+		setCustomProperties(modelList);
+		Pager<I> pager = new Pager<I>(pageNum, pageSize, total, modelList);
+		return pager;
+	}
 //
 //	/**
 //	 * 模糊查询(字符串参数)
@@ -181,8 +183,8 @@ public abstract class BaseService<E extends AbstractEntity, I extends BaseInfo> 
 //		getAllField(fields, clazz.getSuperclass());
 //	}
 //
-//	protected void setCustomProperties(List<I> list) {
-//	}
+	protected void setCustomProperties(List<I> list) {
+	}
 //
 //	public List<I> getValidList() {
 //		List<E> list = getValidEntityList();

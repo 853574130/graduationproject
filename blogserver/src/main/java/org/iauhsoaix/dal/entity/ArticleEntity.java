@@ -10,283 +10,126 @@ public class ArticleEntity extends AbstractEntity {
     /**
      *
      */
-    @Column(name = "title")
-    private String title;
+    @Column(name = "article_title")
+    private String articleTitle;
 
     /**
      *
      */
-    @Column(name = "cid")
-    private Integer cid;
+    @Column(name = "article_markdown_content")
+    private String articleMarkdownContent;
 
     /**
      *
      */
-    @Column(name = "uid")
-    private Long uid;
+    @Column(name = "article_html_content")
+    private String articleHtmlContent;
 
     /**
      *
      */
-    @Column(name = "publishdate")
-    private Date publishdate;
+    @Column(name = "article_summary")
+    private String articleSummary;
     /**
-     * md文件源码
+     *
      */
-    @Column(name = "mdcontent")
-    private String mdcontent;
-
-    /**
-     * html源码
-     */
-    @Column(name = "htmlcontent")
-    private String htmlcontent;
+    @Column(name = "user_id")
+    private String userId;
 
     /**
      *
      */
-    @Column(name = "summary")
-    private String summary;
+    @Column(name = "commented")
+    private Integer commented;
 
     /**
      *
      */
-    @Column(name = "edittime")
-    private Date edittime;
+    @Column(name = "article_thumbnail")
+    private String articleThumbnail;
+
+    /**
+     *
+     */
+    @Column(name = "pageView")
+    private Integer pageView;
 
     /**
      * 0表示草稿箱，1表示已发表，2表示已删除
      */
-    @Column(name = "state")
-    private Integer state;
+    @Column(name = "status")
+    private Integer status;
 
-    /**
-     *
-     */
-    @Column(name = "pageview")
-    private Integer pageview;
 
-//    /**
-//     *
-//     * @return id
-//     */
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    /**
-//     *
-//     * @param id
-//     */
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
-
-    /**
-     *
-     * @return title
-     */
-    public Integer getId() {
-        return id;
+    public String getArticleTitle() {
+        return articleTitle;
     }
 
-    /**
-     *
-     * @param id
-     */
-    public void setId(Integer id) {
-        this.id = id;
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
     }
 
-    /**
-     *
-     * @return title
-     */
-    public String getTitle() {
-        return title;
+    public String getArticleMarkdownContent() {
+        return articleMarkdownContent;
     }
 
-    /**
-     *
-     * @param title
-     */
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+    public void setArticleMarkdownContent(String articleMarkdownContent) {
+        this.articleMarkdownContent = articleMarkdownContent;
     }
 
-    /**
-     * md文件源码
-     * @return mdContent md文件源码
-     */
-    public String getMdcontent() {
-        return mdcontent;
+    public String getArticleHtmlContent() {
+        return articleHtmlContent;
     }
 
-    /**
-     * md文件源码
-     * @param mdcontent md文件源码
-     */
-    public void setMdcontent(String mdcontent) {
-        this.mdcontent = mdcontent == null ? null : mdcontent.trim();
+    public void setArticleHtmlContent(String articleHtmlContent) {
+        this.articleHtmlContent = articleHtmlContent;
     }
 
-    /**
-     * html源码
-     * @return htmlContent html源码
-     */
-    public String getHtmlcontent() {
-        return htmlcontent;
+    public String getArticleSummary() {
+        return articleSummary;
     }
 
-    /**
-     * html源码
-     * @param htmlcontent html源码
-     */
-    public void setHtmlcontent(String htmlcontent) {
-        this.htmlcontent = htmlcontent == null ? null : htmlcontent.trim();
+    public void setArticleSummary(String articleSummary) {
+        this.articleSummary = articleSummary;
     }
 
-    /**
-     *
-     * @return summary
-     */
-    public String getSummary() {
-        return summary;
+    public String getUserId() {
+        return userId;
     }
 
-    /**
-     *
-     * @param summary
-     */
-    public void setSummary(String summary) {
-        this.summary = summary == null ? null : summary.trim();
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    /**
-     *
-     * @return cid
-     */
-    public Integer getCid() {
-        return cid;
+    public Integer getCommented() {
+        return commented;
     }
 
-    /**
-     *
-     * @param cid
-     */
-    public void setCid(Integer cid) {
-        this.cid = cid;
+    public void setCommented(Integer commented) {
+        this.commented = commented;
     }
 
-    /**
-     *
-     * @return uid
-     */
-    public Long getUid() {
-        return uid;
+    public String getArticleThumbnail() {
+        return articleThumbnail;
     }
 
-    /**
-     *
-     * @param uid
-     */
-    public void setUid(Long uid) {
-        this.uid = uid;
+    public void setArticleThumbnail(String articleThumbnail) {
+        this.articleThumbnail = articleThumbnail;
     }
 
-    /**
-     *
-     * @return publishDate
-     */
-    public Date getPublishdate() {
-        return publishdate;
+    public Integer getPageView() {
+        return pageView;
     }
 
-    /**
-     *
-     * @param publishdate
-     */
-    public void setPublishdate(Date publishdate) {
-        this.publishdate = publishdate;
+    public void setPageView(Integer pageView) {
+        this.pageView = pageView;
     }
 
-    /**
-     *
-     * @return editTime
-     */
-    public Date getEdittime() {
-        return edittime;
+    public Integer getStatus() {
+        return status;
     }
 
-    /**
-     *
-     * @param edittime
-     */
-    public void setEdittime(Date edittime) {
-        this.edittime = edittime;
-    }
-
-    /**
-     * 0表示草稿箱，1表示已发表，2表示已删除
-     * @return state 0表示草稿箱，1表示已发表，2表示已删除
-     */
-    public Integer getState() {
-        return state;
-    }
-
-    /**
-     * 0表示草稿箱，1表示已发表，2表示已删除
-     * @param state 0表示草稿箱，1表示已发表，2表示已删除
-     */
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
-    /**
-     *
-     * @return pageView
-     */
-    public Integer getPageview() {
-        return pageview;
-    }
-
-    /**
-     *
-     * @param pageview
-     */
-    public void setPageview(Integer pageview) {
-        this.pageview = pageview;
-    }
-
-    /**
-     *
-     * @return created
-     */
-    public Date getCreated() {
-        return created;
-    }
-
-    /**
-     *
-     * @param created
-     */
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    /**
-     *
-     * @return updated
-     */
-    public Date getUpdated() {
-        return updated;
-    }
-
-    /**
-     *
-     * @param updated
-     */
-    public void setUpdated(Date updated) {
-        this.updated = updated;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

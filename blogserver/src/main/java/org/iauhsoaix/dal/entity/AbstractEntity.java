@@ -14,15 +14,15 @@ public abstract class AbstractEntity extends Object implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(generator = "JDBC")
-    protected Integer id;
+    protected Long id;
     protected Date created;
     protected Date updated;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

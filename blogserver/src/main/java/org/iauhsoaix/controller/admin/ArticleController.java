@@ -2,9 +2,13 @@ package org.iauhsoaix.controller.admin;
 
 import org.apache.commons.io.IOUtils;
 import org.iauhsoaix.bean.ArticleInfo;
+import org.iauhsoaix.controller.BaseController;
+import org.iauhsoaix.dal.entity.ArticleEntity;
+import org.iauhsoaix.exceptions.CommonBusinessException;
 import org.iauhsoaix.oldbean.Article;
 import org.iauhsoaix.oldbean.RespBean;
 import org.iauhsoaix.service.ArticleService;
+import org.iauhsoaix.service.BaseService;
 import org.iauhsoaix.utils.Pager;
 import org.iauhsoaix.utils.Result;
 import org.iauhsoaix.utils.ResultUtils;
@@ -25,7 +29,12 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/article")
-public class ArticleController {
+public class ArticleController extends BaseController<ArticleEntity, ArticleInfo> {
+
+    @Override
+    protected BaseService<ArticleEntity, ArticleInfo> getBaseService() {
+        return articleService;
+    }
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
@@ -73,28 +82,16 @@ public class ArticleController {
         }
         return new RespBean("error", "上传失败!");
     }
-     /**
-       * @Author:iauhsoaix
-       * @date 2018/12/5
-       * @Description:这个方法后期要废弃
-       */
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public Map<String, Object> getArticleByState(@RequestParam(value = "state", defaultValue = "-1") Integer state,
-                                                 @RequestParam(value = "page", defaultValue = "1") Integer page,
-                                                 @RequestParam(value = "count", defaultValue = "6") Integer count,String keywords) {
-        int totalCount = articleService.getArticleCountByState(state, Util.getCurrentUser().getId(),keywords);
-        List<Article> articles = articleService.getArticleByState(state, page, count,keywords);
-        Map<String, Object> map = new HashMap<>();
-        map.put("totalCount", totalCount);
-        map.put("articles", articles);
-        return map;
-    }
 
-    @RequestMapping(value = "/publicArticle", method = RequestMethod.GET)
-    public Result<Pager<ArticleInfo>> visitorGetArticle() {
-        ArticleInfo search=new ArticleInfo();
-        articleService.getListBy(search);
-        return ResultUtils.success();
+    /**
+     * @Author:iauhsoaix
+     * @date 2018/12/5
+     * @Description:这个方法后期要废弃
+     */
+    @RequestMapping(value = "/adminArticlList")
+    public Result<Pager<ArticleInfo>> getAdminArticlList(ArticleInfo search,Integer pageNum) {
+//        List allList= articleService.getListBy(search);
+        return null;
     }
 
 
@@ -112,7 +109,7 @@ public class ArticleController {
     }
 
     @RequestMapping("/dataStatistics")
-    public Map<String,Object> dataStatistics() {
+    public Map<String, Object> dataStatistics() {
         Map<String, Object> map = new HashMap<>();
         List<String> categories = articleService.getCategories();
         List<Integer> dataStatistics = articleService.getDataStatistics();
@@ -120,4 +117,22 @@ public class ArticleController {
         map.put("ds", dataStatistics);
         return map;
     }
+
+    //---------------------------游客接口-------------------------------
+    @RequestMapping(value = "/publicArticle", method = RequestMethod.POST)
+    public Result<Pager<ArticleInfo>> visitorGetArticle(ArticleInfo search) {
+        List<ArticleInfo> list = articleService.getListBy(search);
+        Pager<ArticleInfo> pager = new Pager(1, 20, 1, list);
+//        throw new CommonBusinessException("异常测试");
+//        return ResultUtils.failure("异常测试没通过");
+        return ResultUtils.success(pager);
+    }
+
+    @RequestMapping(value = "/publicArticleDetial", method = RequestMethod.GET)
+    public Result<ArticleInfo> visitorGetArticleDetial(Long id) {
+        ArticleInfo info = articleService.getModel(id);
+        return ResultUtils.success(info);
+    }
+
+
 }

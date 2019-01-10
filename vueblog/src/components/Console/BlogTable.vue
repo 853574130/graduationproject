@@ -34,15 +34,15 @@
       <el-table-column
         label="标题"
         width="400" align="left">
-        <template slot-scope="scope"><span style="color: #409eff;cursor: pointer" @click="itemClick(scope.row)">{{ scope.row.title}}</span>
+        <template slot-scope="scope"><span style="color: #409eff;cursor: pointer" @click="itemClick(scope.row)">{{ scope.row.articleTitle}}</span>
         </template>
       </el-table-column>
       <el-table-column
         label="最近编辑时间" width="140" align="left">
-        <template slot-scope="scope">{{ scope.row.editTime | formatDateTime}}</template>
+        <template slot-scope="scope">{{ scope.row.updated | formatDateTime}}</template>
       </el-table-column>
       <el-table-column
-        prop="nickname"
+        prop="userId"
         label="作者"
         width="120" align="left">
       </el-table-column>
@@ -69,7 +69,6 @@
       <el-button type="danger" size="mini" style="margin: 0px;" v-show="this.articles.length>0 && showDelete"
                  :disabled="this.selItems.length==0" @click="deleteMany">批量删除
       </el-button>
-      <el-button @click="sendrequest">发送请求</el-button>
       <span></span>
       <el-pagination
         background
@@ -82,7 +81,7 @@
 </template>
 
 <script>
-  import {putRequest} from '../../utils/api'
+  import {putRequest, postRequest} from '../../utils/api'
   import {getRequest} from '../../utils/api'
 //  import Vue from 'vue'
 //  var bus = new Vue()
@@ -97,7 +96,13 @@
         totalCount: -1,
         pageSize: 6,
         keywords: '',
-        dustbinData: []
+        dustbinData: [],
+        search:{
+        userId:1,
+        status:1,
+        pageNum:1,
+      },
+      
       }
     },
     mounted: function () {
@@ -134,29 +139,37 @@
         var _this = this;
         var url = '';
         if (this.state == -2) {
-          url = "/admin/article/all" + "?page=" + page + "&count=" + count + "&keywords=" + this.keywords;
+          // url = "/admin/article/all" + "?page=" + page + "&count=" + count + "&keywords=" + this.keywords;
+          url = "/api/article/list"
         } else {
           url = "/article/all?state=" + this.state + "&page=" + page + "&count=" + count + "&keywords=" + this.keywords;
         }
-        getRequest(url).then(resp=> {
+
+        if (this.state == -1) {
+          url = "/api/article/adminArticlList"
+          this.search.search=null;
+        }
+        postRequest(url,this.search,this.pageNum).then(resp=> {
           _this.loading = false;
           if (resp.status == 200) {
-            _this.articles = resp.data.articles;
+            this.articles = resp.data.data.list;
             console.log("resp",resp);
-            // console.log("_this.articles",_this.articles);
+            // console.log("this.articles",this.articles);
             
             _this.totalCount = resp.data.totalCount;
           } else {
             _this.$message({type: 'error', message: '数据加载失败!'});
           }
-        }, resp=> {
-          _this.loading = false;
-          if (resp.response.status == 403) {
-            _this.$message({type: 'error', message: resp.response.data});
-          } else {
-            _this.$message({type: 'error', message: '数据加载失败!'});
-          }
-        }).catch(resp=> {
+        }
+        // , resp=> {
+        //   _this.loading = false;
+          // if (resp.response.status == 403) {
+          //   _this.$message({type: 'error', message: resp.response.data});
+          // } else {
+          //   _this.$message({type: 'error', message: '数据加载失败!'});
+          // }
+        // }
+        ).catch(resp=> {
           //压根没见到服务器
           _this.loading = false;
           _this.$message({type: 'error', message: '数据加载失败!'});
@@ -172,56 +185,45 @@
         this.dustbinData.push(row.id);
         this.deleteToDustBin(row.state);
       },
-      deleteToDustBin(state){
-        var _this = this;
-        this.$confirm(state != 2 ? '将该文件放入回收站，是否继续?' : '永久删除该文件, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          _this.loading = true;
-          var url = '';
-          if (_this.state == -2) {
-            url = "/admin/article/dustbin";
-          } else {
-            url = "/article/dustbin";
-          }
-          putRequest(url, {aids: _this.dustbinData, state: state}).then(resp=> {
-            if (resp.status == 200) {
-              var data = resp.data;
-              _this.$message({type: data.status, message: data.msg});
-              if (data.status == 'success') {
-                window.bus.$emit('blogTableReload')//通过选项卡都重新加载数据
-              }
-            } else {
-              _this.$message({type: 'error', message: '删除失败!'});
-            }
-            _this.loading = false;
-            _this.dustbinData = []
-          }, resp=> {
-            _this.loading = false;
-            _this.$message({type: 'error', message: '删除失败!'});
-            _this.dustbinData = []
-          });
-        }).catch(() => {
-          _this.$message({
-            type: 'info',
-            message: '已取消删除'
-          });
-          _this.dustbinData = []
-        });
-      },
-
-       sendrequest(currentPage) {
-        let url = "/article/publicArticle";
-        // let url ="/admin/category/all";
-      getRequest(url).then(resp=> {
-        console.log("resp",resp);
-        if (resp.status == 200) {
-        }
-      } );
-
-      }
+      // deleteToDustBin(state){
+      //   var _this = this;
+      //   this.$confirm(state != 2 ? '将该文件放入回收站，是否继续?' : '永久删除该文件, 是否继续?', '提示', {
+      //     confirmButtonText: '确定',
+      //     cancelButtonText: '取消',
+      //     type: 'warning'
+      //   }).then(() => {
+      //     _this.loading = true;
+      //     var url = '';
+      //     if (_this.state == -2) {
+      //       url = "/admin/article/dustbin";
+      //     } else {
+      //       url = "/article/dustbin";
+      //     }
+      //     putRequest(url, {aids: _this.dustbinData, state: state}).then(resp=> {
+      //       if (resp.status == 200) {
+      //         var data = resp.data;
+      //         _this.$message({type: data.status, message: data.msg});
+      //         if (data.status == 'success') {
+      //           window.bus.$emit('blogTableReload')//通过选项卡都重新加载数据
+      //         }
+      //       } else {
+      //         _this.$message({type: 'error', message: '删除失败!'});
+      //       }
+      //       _this.loading = false;
+      //       _this.dustbinData = []
+      //     }, resp=> {
+      //       _this.loading = false;
+      //       _this.$message({type: 'error', message: '删除失败!'});
+      //       _this.dustbinData = []
+      //     });
+      //   }).catch(() => {
+      //     _this.$message({
+      //       type: 'info',
+      //       message: '已取消删除'
+      //     });
+      //     _this.dustbinData = []
+      //   });
+      // },
     },
     
     props: ['state', 'showEdit', 'showDelete', 'activeName']

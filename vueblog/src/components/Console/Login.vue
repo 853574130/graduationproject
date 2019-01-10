@@ -40,7 +40,7 @@
       submitClick: function () {
         var _this = this;
         this.loading = true;
-        postRequest('/login', {
+        postRequest('/api/login', {
           username: this.loginForm.username,
           password: this.loginForm.password
         }).then(resp=> {

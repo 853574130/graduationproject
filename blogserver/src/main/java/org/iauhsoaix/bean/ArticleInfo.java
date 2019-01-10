@@ -3,214 +3,108 @@ package org.iauhsoaix.bean;
 import java.util.Date;
 import org.iauhsoaix.bean.BaseInfo;
 
+import javax.persistence.Column;
+
 public class ArticleInfo extends BaseInfo {
-    /**
-     * 
-     */
-    private String title;
 
-    /**
-     * md文件源码
-     */
-    private String mdcontent;
+    private String articleTitle;
 
-    /**
-     * html源码
-     */
-    private String htmlcontent;
+    private String articleMarkdownContent;
 
-    /**
-     * 
-     */
-    private String summary;
+    private String articleHtmlContent;
 
-    /**
-     * 
-     */
-    private Integer cid;
+    private String articleSummary;
 
-    /**
-     * 
-     */
-    private Integer uid;
+    private String userId;
 
-    /**
-     * 
-     */
-    private Date publishdate;
+    private Integer commented;
 
-    /**
-     * 
-     */
-    private Date edittime;
+    private String articleThumbnail;
 
-    /**
-     * 0表示草稿箱，1表示已发表，2表示已删除
-     */
-    private Integer state;
+    private Integer pageView;
 
-    /**
-     * 
-     */
-    private Integer pageview;
+    private Integer status;
+    private Date updated;
 
-    /**
-     * 
-     * @return title 
-     */
-    public String getTitle() {
-        return title;
+    public Date getUpdated() {
+        return updated;
     }
 
-    /**
-     * 
-     * @param title 
-     */
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 
-    /**
-     * md文件源码
-     * @return mdContent md文件源码
-     */
-    public String getMdcontent() {
-        return mdcontent;
+    public String getArticleTitle() {
+        return articleTitle;
     }
 
-    /**
-     * md文件源码
-     * @param mdcontent md文件源码
-     */
-    public void setMdcontent(String mdcontent) {
-        this.mdcontent = mdcontent == null ? null : mdcontent.trim();
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
     }
 
-    /**
-     * html源码
-     * @return htmlContent html源码
-     */
-    public String getHtmlcontent() {
-        return htmlcontent;
+    public String getArticleMarkdownContent() {
+        return articleMarkdownContent;
     }
 
-    /**
-     * html源码
-     * @param htmlcontent html源码
-     */
-    public void setHtmlcontent(String htmlcontent) {
-        this.htmlcontent = htmlcontent == null ? null : htmlcontent.trim();
+    public void setArticleMarkdownContent(String articleMarkdownContent) {
+        this.articleMarkdownContent = articleMarkdownContent;
     }
 
-    /**
-     * 
-     * @return summary 
-     */
-    public String getSummary() {
-        return summary;
+    public String getArticleHtmlContent() {
+        return articleHtmlContent;
     }
 
-    /**
-     * 
-     * @param summary 
-     */
-    public void setSummary(String summary) {
-        this.summary = summary == null ? null : summary.trim();
+    public void setArticleHtmlContent(String articleHtmlContent) {
+        this.articleHtmlContent = articleHtmlContent;
     }
 
-    /**
-     * 
-     * @return cid 
-     */
-    public Integer getCid() {
-        return cid;
+    public String getArticleSummary() {
+        return articleSummary;
     }
 
-    /**
-     * 
-     * @param cid 
-     */
-    public void setCid(Integer cid) {
-        this.cid = cid;
+    public void setArticleSummary(String articleSummary) {
+        this.articleSummary = articleSummary;
     }
 
-    /**
-     * 
-     * @return uid 
-     */
-    public Integer getUid() {
-        return uid;
+    public String getUserId() {
+        return userId;
     }
 
-    /**
-     * 
-     * @param uid 
-     */
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    /**
-     * 
-     * @return publishDate 
-     */
-    public Date getPublishdate() {
-        return publishdate;
+    public Integer getCommented() {
+        return commented;
     }
 
-    /**
-     * 
-     * @param publishdate 
-     */
-    public void setPublishdate(Date publishdate) {
-        this.publishdate = publishdate;
+    public void setCommented(Integer commented) {
+        this.commented = commented;
     }
 
-    /**
-     * 
-     * @return editTime 
-     */
-    public Date getEdittime() {
-        return edittime;
+    public String getArticleThumbnail() {
+        return articleThumbnail;
     }
 
-    /**
-     * 
-     * @param edittime 
-     */
-    public void setEdittime(Date edittime) {
-        this.edittime = edittime;
+    public void setArticleThumbnail(String articleThumbnail) {
+        this.articleThumbnail = articleThumbnail;
     }
 
-    /**
-     * 0表示草稿箱，1表示已发表，2表示已删除
-     * @return state 0表示草稿箱，1表示已发表，2表示已删除
-     */
-    public Integer getState() {
-        return state;
+    public Integer getPageView() {
+        return pageView;
     }
 
-    /**
-     * 0表示草稿箱，1表示已发表，2表示已删除
-     * @param state 0表示草稿箱，1表示已发表，2表示已删除
-     */
-    public void setState(Integer state) {
-        this.state = state;
+    public void setPageView(Integer pageView) {
+        this.pageView = pageView;
     }
 
-    /**
-     * 
-     * @return pageView 
-     */
-    public Integer getPageview() {
-        return pageview;
+    @Override
+    public Integer getStatus() {
+        return status;
     }
 
-    /**
-     * 
-     * @param pageview 
-     */
-    public void setPageview(Integer pageview) {
-        this.pageview = pageview;
+    @Override
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

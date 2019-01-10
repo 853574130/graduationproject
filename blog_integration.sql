@@ -4,7 +4,7 @@ CREATE TABLE `article` (
   `article_title` varchar(255) DEFAULT NULL COMMENT '文章标题',
   `article_markdown_content` text COMMENT '文章内容 Markdown格式',
   `article_html_content` text COMMENT '文章内容 html格式',
-  `article_summary` text COMMENT '文章摘要',
+  #`article_summary` text COMMENT '文章摘要',
   #`cid` int(11) DEFAULT NULL COMMENT '',
   `user_id` int(11) DEFAULT NULL COMMENT '发表用户 多对一',
   `commented` int(1) DEFAULT '0' COMMENT '文章能否被评论',

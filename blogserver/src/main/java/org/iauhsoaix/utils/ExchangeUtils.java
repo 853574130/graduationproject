@@ -72,7 +72,7 @@ public class ExchangeUtils {
 		}
 	}
 
-	public static List<Integer> getIdList(List<? extends AbstractEntity> list) {
+	public static List<Long> getIdList(List<? extends AbstractEntity> list) {
 		return list.stream().map(AbstractEntity:: getId).collect(Collectors.toList());
 	}
 

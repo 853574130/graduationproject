@@ -58,7 +58,7 @@ export default {
       vheader
   },
   created(){
-    this.timeout();
+    // this.timeout();
   }
 };
 </script>

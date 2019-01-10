@@ -17,7 +17,7 @@ public abstract class BaseManager<E extends AbstractEntity>{
 	@Resource
 	protected abstract BasicMapper<E> getMapper();
 
-	public E getEntityById(Integer id) {
+	public E getEntityById(Long id) {
 		return getMapper().selectByPrimaryKey(id);
 	}
 	
