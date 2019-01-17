@@ -1,80 +1,69 @@
 <template>
   <div id="articleList">
     <!-- <transition name="slide-fade"> -->
-      <!-- <loading v-if="loading"></loading> -->
-      <div class="layer">
+    <!-- <loading v-if="loading"></loading> -->
+    <div class="layer">
 
+      <ul>
 
-        <ul>
-         
-          <li v-for="(item,index) in articleinfos" :key="index">
+        <li v-for="(item,index) in articleinfos" :key="index">
 
+          <router-link :to="{ name:'detail',params:{ id:item.id } }">
 
-             <router-link :to="{ name:'detail',params:{ id:item.id } }" >
+            <div class="article-img-inner">
+              <img src="../../../../static/img/article1.jpg">
+            </div>
 
-              <div class="article-img-inner">
-                <img  src="../../../../static/img/article1.jpg">
-              </div>
-
-              <div class="article-content">  
+            <div class="article-content">
               <!-- :style="{borderLeft:item.labels[0] ? `10px solid #${item.labels[0].color}`: ''}" -->
-              
-               
-                <h1>{{item.articleTitle}}</h1>
+
+              <h1>{{item.articleTitle}}</h1>
 
               <p class="article-des" v-html="articleinfos[index].articleHtmlContent">文章描述</p>
-                 <div class="article-label">
+              <div class="article-label">
 
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-1"></use>
-                  </svg>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-1"></use>
+                </svg>
 
-                  
-                  <div class="article-time">更新时间:{{item.updateTime}}</div>
+                <div class="article-time">更新时间:{{item.updateTime}}</div>
 
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-2"></use>
+                </svg>
 
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-2"></use>
-                  </svg>
-
-                  <label v-for="(items,index) in item.labels"
-                         :style="{background:`#${items.color}`}" :key="index">{{items.name}}</label>
-                </div>
+                <label v-for="(items,index) in item.labels" :style="{background:`#${items.color}`}" :key="index">{{items.name}}</label>
               </div>
-            </router-link> 
-            <!-- 跳转到详情页 -->
-         </li>
-        </ul>
-        <pagination :page-no="pageNo" :current.sync="currentPage"></pagination>
+            </div>
+          </router-link>
+          <!-- 跳转到详情页 -->
+        </li>
+      </ul>
+      <pagination :page-no="pageNo" :current.sync="currentPage"></pagination>
 
-
-
-        <aside>
-          <div class="author-inner">
-            <img class="author-img" src="../../../../static/img/author.jpg" alt="">
-            <h3>iauhsoaix</h3>
-            <p>阅读/篮球/美食/目前居住在浙江</p>
-            <br>
-            <p>你可以在这里找到我，未完待续...</p>
-            <ul>
+      <aside>
+        <div class="author-inner">
+          <img class="author-img" src="../../../../static/img/author.jpg" alt="">
+          <h3>iauhsoaix{{userInfo.nickName}}</h3>
+          <p>阅读/篮球/美食/目前居住在浙江 {{userInfo.description}}</p>
+          <br>
+          <ul>
+            <a @click="goTo">管理
               <li>
-                <a href="#" target="_blank">
-                  <img src="../../../../static/img/github.png" alt="">
-                </a>
+                <img src="../../../../static/img/github.png" alt="">
               </li>
-            </ul>
-          </div>
+            </a>
 
+          </ul>
+        </div>
 
-          <!--<div class="img-inner">-->
-          <!--<img src="http://via.placeholder.com/240x240" alt="">-->
-          <!--</div>-->
+        <!--<div class="img-inner">-->
+        <!--<img src="http://via.placeholder.com/240x240" alt="">-->
+        <!--</div>-->
 
+      </aside>
 
-        </aside>
-        
-      </div>
-
+    </div>
 
     <!-- </transition> -->
   </div>
@@ -100,6 +89,10 @@ export default {
         userId:1,
         status:1
       },
+      userInfo:{
+        nickName:"",
+        description:"",
+      },
       sourcedata: [], //  搞点假数据显示下
       articleinfos: []
     };
@@ -115,7 +108,20 @@ export default {
     // }
   },
   methods: {
+    goTo(){
+      this.$router.push('/login');
+    },
     getData(){
+      //点击用户名后面的管理进行登录
+      postRequest("/api/article/publicArticle",this.search).then(resp=> {
+        if (resp.status == 200) {
+          this.articleinfos=resp.data.data.list;
+          console.log("resp---------------------",resp.data.data.list);
+          this.$message.success("获取文章成功");
+          // this.$message.error(resp.data.message);
+        }
+      } );
+      
       postRequest("/api/article/publicArticle",this.search).then(resp=> {
         if (resp.status == 200) {
           this.articleinfos=resp.data.data.list;
@@ -144,53 +150,13 @@ export default {
      * 根据username吧
      * 给列表传个username的参数
      */
-    requestData(currentPage) {
-
-      // console.log(this.GLOBAL.BASE_URL);
-      //--------------------------------------------------------------------------------
-      // var request = new XMLHttpRequest();
-      // request.open("GET", "/api/article/publicArticle", true);
-
-      // request.onload = function() {
-      //   if (this.status >= 200 && this.status < 400) {
-      //     // this.$message.error(res.data.message);
-      //   }
-      // };
-      
-      // request.send();
-      //--------------------------------------------------------------------------------
-      // this.$axios
-      //   .post("/api/article/publicArticle")
-      //   .then(response => {
-      //     var status = response.data;
-      //     if (status === "successful") {
-      //       this.$router.push("/information");
-      //     } else {
-      //       alert(response.data.message);
-      //     }
-      //     console.log(response);
-      //   })
-      //   .catch(error => {
-      //     console.log(response);
-      //   });
-
-    }
+    
   },
   created() {
             this.getData()
         },
   computed: {
-    // getMainImage() {
-    //   let arr = [];
-    //   for (let item of this.list) {
-    //     if (marked(item.body, {sanitize: true}).match(/\bsrc\b\s*=\s*[\'\"]?([^\'\"]*)[\'\"]?/)) {
-    //       arr.push(marked(item.body, {sanitize: true}).match(/\bsrc\b\s*=\s*[\'\"]?([^\'\"]*)[\'\"]?/)[1]);
-    //     } else {
-    //       arr.push('http://via.placeholder.com/200x200');
-    //     }
-    //   }
-    //   return arr;
-    // },
+
   },
   components: {
     loading,

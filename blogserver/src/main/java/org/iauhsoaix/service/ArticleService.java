@@ -7,7 +7,7 @@ import org.iauhsoaix.dal.mapper.ArticleMapper;
 import org.iauhsoaix.dal.mapper.TagsMapper;
 import org.iauhsoaix.manager.ArticleManager;
 import org.iauhsoaix.manager.BaseManager;
-import org.iauhsoaix.utils.Util;
+//import org.iauhsoaix.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,53 +34,53 @@ public class ArticleService extends BaseService<ArticleEntity, ArticleInfo> {
         return articleManager;
     }
 
-    public int addNewArticle(Article article) {
-        //处理文章摘要
-        if (article.getSummary() == null || "".equals(article.getSummary())) {
-            //直接截取
-            String stripHtml = stripHtml(article.getHtmlContent());
-            article.setSummary(stripHtml.substring(0, stripHtml.length() > 50 ? 50 : stripHtml.length()));
-        }
-        if (article.getId() == -1) {
-            //添加操作
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            if (article.getStatus() == 1) {
-                //设置发表日期
-                article.setPublishDate(timestamp);
-            }
-            article.setEditTime(timestamp);
-            //设置当前用户
-            article.setUid(Util.getCurrentUser().getId());
-            int i = articleMapper.addNewArticle(article);
-            //打标签
-            String[] dynamicTags = article.getDynamicTags();
-            if (dynamicTags != null && dynamicTags.length > 0) {
-                int tags = addTagsToArticle(dynamicTags, article.getId());
-                if (tags == -1) {
-                    return tags;
-                }
-            }
-            return i;
-        } else {
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            if (article.getStatus() == 1) {
-                //设置发表日期
-                article.setPublishDate(timestamp);
-            }
-            //更新
-            article.setEditTime(new Timestamp(System.currentTimeMillis()));
-            int i = articleMapper.updateArticle(article);
-            //修改标签
-            String[] dynamicTags = article.getDynamicTags();
-            if (dynamicTags != null && dynamicTags.length > 0) {
-                int tags = addTagsToArticle(dynamicTags, article.getId());
-                if (tags == -1) {
-                    return tags;
-                }
-            }
-            return i;
-        }
-    }
+//    public int addNewArticle(Article article) {
+//        //处理文章摘要
+//        if (article.getSummary() == null || "".equals(article.getSummary())) {
+//            //直接截取
+//            String stripHtml = stripHtml(article.getHtmlContent());
+//            article.setSummary(stripHtml.substring(0, stripHtml.length() > 50 ? 50 : stripHtml.length()));
+//        }
+//        if (article.getId() == -1) {
+//            //添加操作
+//            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//            if (article.getStatus() == 1) {
+//                //设置发表日期
+//                article.setPublishDate(timestamp);
+//            }
+//            article.setEditTime(timestamp);
+//            //设置当前用户
+//            article.setUid(Util.getCurrentUser().getId());
+//            int i = articleMapper.addNewArticle(article);
+//            //打标签
+//            String[] dynamicTags = article.getDynamicTags();
+//            if (dynamicTags != null && dynamicTags.length > 0) {
+//                int tags = addTagsToArticle(dynamicTags, article.getId());
+//                if (tags == -1) {
+//                    return tags;
+//                }
+//            }
+//            return i;
+//        } else {
+//            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//            if (article.getStatus() == 1) {
+//                //设置发表日期
+//                article.setPublishDate(timestamp);
+//            }
+//            //更新
+//            article.setEditTime(new Timestamp(System.currentTimeMillis()));
+//            int i = articleMapper.updateArticle(article);
+//            //修改标签
+//            String[] dynamicTags = article.getDynamicTags();
+//            if (dynamicTags != null && dynamicTags.length > 0) {
+//                int tags = addTagsToArticle(dynamicTags, article.getId());
+//                if (tags == -1) {
+//                    return tags;
+//                }
+//            }
+//            return i;
+//        }
+//    }
 
     private int addTagsToArticle(String[] dynamicTags, Long aid) {
         //1.删除该文章目前所有的标签
@@ -105,11 +105,11 @@ public class ArticleService extends BaseService<ArticleEntity, ArticleInfo> {
    * @date 2018/12/5
    * @Description:
    */
-    public List<Article> getArticleByState(Integer state, Integer page, Integer count,String keywords) {
-        int start = (page - 1) * count;
-        Long uid = Util.getCurrentUser().getId();
-        return articleMapper.getArticleByState(state, start, count, uid,keywords);
-    }
+//    public List<Article> getArticleByState(Integer state, Integer page, Integer count,String keywords) {
+//        int start = (page - 1) * count;
+//        Long uid = Util.getCurrentUser().getId();
+//        return articleMapper.getArticleByState(state, start, count, uid,keywords);
+//    }
 
 //    public List<Article> getArticleByStateByAdmin(Integer page, Integer count,String keywords) {
 //        int start = (page - 1) * count;
@@ -142,17 +142,17 @@ public class ArticleService extends BaseService<ArticleEntity, ArticleInfo> {
      * 获取最近七天的日期
      * @return
      */
-    public List<String> getCategories() {
-        return articleMapper.getCategories(Util.getCurrentUser().getId());
-    }
-
-    /**
-     * 获取最近七天的数据
-     * @return
-     */
-    public List<Integer> getDataStatistics() {
-        return articleMapper.getDataStatistics(Util.getCurrentUser().getId());
-    }
+//    public List<String> getCategories() {
+//        return articleMapper.getCategories(Util.getCurrentUser().getId());
+//    }
+//
+//    /**
+//     * 获取最近七天的数据
+//     * @return
+//     */
+//    public List<Integer> getDataStatistics() {
+//        return articleMapper.getDataStatistics(Util.getCurrentUser().getId());
+//    }
 
 
 }

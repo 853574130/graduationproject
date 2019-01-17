@@ -27,11 +27,11 @@ public class AdminController {
     @Autowired
     ArticleService articleService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Result<Void> login(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                              @RequestParam(value = "count", defaultValue = "6") Integer count, String keywords) {
-        return ResultUtils.success();
-    }
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public Result<Void> login(@RequestParam(value = "page", defaultValue = "1") Integer page,
+//                              @RequestParam(value = "count", defaultValue = "6") Integer count, String keywords) {
+//        return ResultUtils.success();
+//    }
 
 
 //    @RequestMapping(value = "/article/all", method = RequestMethod.GET)

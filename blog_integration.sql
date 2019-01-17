@@ -106,8 +106,9 @@ CREATE TABLE `user` (
   `user_account` varchar(64) DEFAULT NULL COMMENT '用户账号',
   #`nickname` varchar(64) DEFAULT NULL COMMENT '显示昵称',
   `password` varchar(255) DEFAULT NULL COMMENT '密码',
-  `type` varchar(10) DEFAULT 0 COMMENT '类型，0普通账号，10管理员',
+  `type` varchar(10) DEFAULT 0 COMMENT '类型，0普通账号，10管理员,有待商榷，这里应该可以直接省略，权限用role的值来表示就行',
   #`enabled` tinyint(1) DEFAULT '1' COMMENT '日志标题',
+  `role` int(16) DEFAULT '1' COMMENT '角色权限',
   `email` varchar(64) DEFAULT NULL COMMENT '邮箱',
   `userface` varchar(255) DEFAULT NULL,
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -115,6 +116,7 @@ CREATE TABLE `user` (
   `status` int(1) NOT NULL DEFAULT '1' COMMENT '状态，1：正常，0：禁用',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `log`;
 CREATE TABLE `log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

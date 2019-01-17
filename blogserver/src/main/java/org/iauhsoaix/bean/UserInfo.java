@@ -7,12 +7,12 @@ public class UserInfo extends BaseInfo {
     /**
      * 
      */
-    private String username;
+    private String userName;
 
     /**
      * 
      */
-    private String nickname;
+    private String nickName;
 
     /**
      * 
@@ -32,43 +32,48 @@ public class UserInfo extends BaseInfo {
     /**
      * 
      */
-    private String userface;
+    private String userFace;
+    private Integer role;
+    private Integer type;
 
-    /**
-     * 
-     */
-    private Date regtime;
-
-    /**
-     * 
-     * @return username 
-     */
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    /**
-     * 
-     * @param username 
-     */
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    /**
-     * 
-     * @return nickname 
-     */
-    public String getNickname() {
-        return nickname;
+    public String getNickName() {
+        return nickName;
     }
 
-    /**
-     * 
-     * @param nickname 
-     */
-    public void setNickname(String nickname) {
-        this.nickname = nickname == null ? null : nickname.trim();
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getUserFace() {
+        return userFace;
+    }
+
+    public void setUserFace(String userFace) {
+        this.userFace = userFace;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     /**
@@ -119,35 +124,5 @@ public class UserInfo extends BaseInfo {
         this.email = email == null ? null : email.trim();
     }
 
-    /**
-     * 
-     * @return userface 
-     */
-    public String getUserface() {
-        return userface;
-    }
 
-    /**
-     * 
-     * @param userface 
-     */
-    public void setUserface(String userface) {
-        this.userface = userface == null ? null : userface.trim();
-    }
-
-    /**
-     * 
-     * @return regTime 
-     */
-    public Date getRegtime() {
-        return regtime;
-    }
-
-    /**
-     * 
-     * @param regtime 
-     */
-    public void setRegtime(Date regtime) {
-        this.regtime = regtime;
-    }
 }

@@ -12,7 +12,7 @@ import org.iauhsoaix.service.BaseService;
 import org.iauhsoaix.utils.Pager;
 import org.iauhsoaix.utils.Result;
 import org.iauhsoaix.utils.ResultUtils;
-import org.iauhsoaix.utils.Util;
+//import org.iauhsoaix.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,15 +41,15 @@ public class ArticleController extends BaseController<ArticleEntity, ArticleInfo
     @Autowired
     ArticleService articleService;
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public RespBean addNewArticle(Article article) {
-        int result = articleService.addNewArticle(article);
-        if (result == 1) {
-            return new RespBean("success", article.getId() + "");
-        } else {
-            return new RespBean("error", article.getStatus() == 0 ? "文章保存失败!" : "文章发表失败!");
-        }
-    }
+//    @RequestMapping(value = "/", method = RequestMethod.POST)
+//    public RespBean addNewArticle(Article article) {
+//        int result = articleService.addNewArticle(article);
+//        if (result == 1) {
+//            return new RespBean("success", article.getId() + "");
+//        } else {
+//            return new RespBean("error", article.getStatus() == 0 ? "文章保存失败!" : "文章发表失败!");
+//        }
+//    }
 
     /**
      * 上传图片
@@ -108,15 +108,15 @@ public class ArticleController extends BaseController<ArticleEntity, ArticleInfo
         return new RespBean("error", "删除失败!");
     }
 
-    @RequestMapping("/dataStatistics")
-    public Map<String, Object> dataStatistics() {
-        Map<String, Object> map = new HashMap<>();
-        List<String> categories = articleService.getCategories();
-        List<Integer> dataStatistics = articleService.getDataStatistics();
-        map.put("categories", categories);
-        map.put("ds", dataStatistics);
-        return map;
-    }
+//    @RequestMapping("/dataStatistics")
+//    public Map<String, Object> dataStatistics() {
+//        Map<String, Object> map = new HashMap<>();
+//        List<String> categories = articleService.getCategories();
+//        List<Integer> dataStatistics = articleService.getDataStatistics();
+//        map.put("categories", categories);
+//        map.put("ds", dataStatistics);
+//        return map;
+//    }
 
     //---------------------------游客接口-------------------------------
     @RequestMapping(value = "/publicArticle", method = RequestMethod.POST)

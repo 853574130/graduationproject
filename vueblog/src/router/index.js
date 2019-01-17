@@ -25,197 +25,211 @@ Vue.use(Router)
 
 export default new Router({
     routes: [{
-            path: '/',
-            name: '首页测试',
-            hidden: true,
-            component: Main
+        path: '/',
+        redirect: '/dashboard'
+    },
+    {
+        path: '/login',
+        name: '登录',
+        hidden: true,
+        component: Login
+    },
+    {
+        path: "/",
+        component: resolve => require(["../components/Console/Home.vue"], resolve),
+        meta: {
+            title: "自述文件"
         },
-        {
-            path: '/login',
-            name: '登录',
-            hidden: true,
-            component: Login
+        children: [{
+            path: "/dashboard",
+            component: resolve =>
+                require(["../components/Console/dataStatistics/dashboard"], resolve),
+            meta: {
+                title: "系统首页"
+            }
         },
-        {
-            path: '/home',
-            component: Home,
-            // name: '栏目管理',
-            children: [{
-                path: '/dashboard',
-                name: '仪表盘',
-                component: dashboard,
-                hidden: true,
-                // children: [{
-                //     path: '/articleList',
-                //     name: '文章列表',
-                //     component: ArticleList,
-                //     meta: {
-                //         keepAlive: true
-                //     }
-                // }]
+        ]
+    },
+        // {
+        //     path: '/home',
+        //     component: Home,
+        //     // name: '栏目管理',
+        //     children: [{
+        //         path: '/dashboard',
+        //         name: '仪表盘',
+        //         component: dashboard,
+        //         hidden: true,
+        //         // children: [{
+        //         //     path: '/articleList',
+        //         //     name: '文章列表',
+        //         //     component: ArticleList,
+        //         //     meta: {
+        //         //         keepAlive: true
+        //         //     }
+        //         // }]
 
-            }]
-        },
+        //     }]
+        // },
 
-        {
-            path: '/home',
-            component: Home,
-            name: '文章管理',
-            iconCls: 'fa fa-file-text-o',
-            children: [{
-                path: '/articleList',
-                name: '文章列表',
-                component: ArticleList,
-                meta: {
-                    keepAlive: true
-                }
-            }, {
-                path: '/postArticle',
-                name: '发表文章',
-                component: PostArticle,
-                meta: {
-                    keepAlive: false
-                }
-            }, {
-                path: '/blogDetail',
-                name: '博客详情',
-                component: BlogDetail,
-                hidden: true,
-                meta: {
-                    keepAlive: false
-                }
-            }, {
-                path: '/editBlog',
-                name: '编辑博客',
-                component: PostArticle,
-                hidden: true,
-                meta: {
-                    keepAlive: false
-                }
-            }]
-        },
-        {
-            path: '/home',
-            component: Home,
-            name: '附件管理',
-            children: [{
-                path: '/attach',
-                iconCls: 'el-icon-picture',
-                name: '附件管理',
-                // component: attachmanage
-                component: Attach
-            }]
-        },
+        // {
+        //     path: '/home',
+        //     component: Home,
+        //     name: '文章管理',
+        //     iconCls: 'fa fa-file-text-o',
+        //     children: [{
+        //         path: '/articleList',
+        //         name: '文章列表',
+        //         component: ArticleList,
+        //         meta: {
+        //             keepAlive: true
+        //         }
+        //     }, {
+        //         path: '/postArticle',
+        //         name: '发表文章',
+        //         component: PostArticle,
+        //         meta: {
+        //             keepAlive: false
+        //         }
+        //     }, {
+        //         path: '/blogDetail',
+        //         name: '博客详情',
+        //         component: BlogDetail,
+        //         hidden: true,
+        //         meta: {
+        //             keepAlive: false
+        //         }
+        //     }, {
+        //         path: '/editBlog',
+        //         name: '编辑博客',
+        //         component: PostArticle,
+        //         hidden: true,
+        //         meta: {
+        //             keepAlive: false
+        //         }
+        //     }]
+        // },
+        // {
+        //     path: '/home',
+        //     component: Home,
+        //     name: '附件管理',
+        //     children: [{
+        //         path: '/attach',
+        //         iconCls: 'el-icon-picture',
+        //         name: '附件管理',
+        //         // component: attachmanage
+        //         component: Attach
+        //     }]
+        // },
 
-        {
-            path: '/home',
-            component: Home,
-            name: '用户管理',
-            children: [{
-                path: '/user',
-                iconCls: 'fa fa-user-o',
-                name: '用户管理',
-                component: UserMana
-            }]
-        },
-        {
-            path: '/home',
-            component: Home,
-            name: '栏目管理',
-            children: [{
-                path: '/cateMana',
-                iconCls: 'fa fa-reorder',
-                name: '栏目管理',
-                component: CateMana
-            }]
-        },
-        {
-            path: '/home',
-            component: Home,
-            name: '博客设置',
-            iconCls: 'fa fa-bar-chart',
-            children: [{
-                path: '/blogsetting',
-                iconCls: 'el-icon-setting',
-                name: '博客设置',
-                component: BlogSetting
-            }]
-        },
-        {
-            path: '/home',
-            component: Home,
-            hidden: true,
-            children: [{
-                path: '/userinfo',
-                component: UserInfo
+        // {
+        //     path: '/home',
+        //     component: Home,
+        //     name: '用户管理',
+        //     children: [{
+        //         path: '/user',
+        //         iconCls: 'fa fa-user-o',
+        //         name: '用户管理',
+        //         component: UserMana
+        //     }]
+        // },
+        // {
+        //     path: '/home',
+        //     component: Home,
+        //     name: '栏目管理',
+        //     children: [{
+        //         path: '/cateMana',
+        //         iconCls: 'fa fa-reorder',
+        //         name: '栏目管理',
+        //         component: CateMana
+        //     }]
+        // },
+        // {
+        //     path: '/home',
+        //     component: Home,
+        //     name: '博客设置',
+        //     iconCls: 'fa fa-bar-chart',
+        //     children: [{
+        //         path: '/blogsetting',
+        //         iconCls: 'el-icon-setting',
+        //         name: '博客设置',
+        //         component: BlogSetting
+        //     }]
+        // },
+        // {
+        //     path: '/home',
+        //     component: Home,
+        //     hidden: true,
+        //     children: [{
+        //         path: '/userinfo',
+        //         component: UserInfo
 
-            }]
-        },
-        {
-            path: '/home',
-            component: Home,
-            hidden: true,
-            children: [{
-                path: '/editpwd',
-                component: editpwd
+        //     }]
+        // },
+        // {
+        //     path: '/home',
+        //     component: Home,
+        //     hidden: true,
+        //     children: [{
+        //         path: '/editpwd',
+        //         component: editpwd
 
-            }]
-        },
-        {
-            path: '/home',
-            component: Home,
-            hidden: true,
-            children: [{
-                path: '/stylesetting',
-                component: stylesetting
+        //     }]
+        // },
+        // {
+        //     path: '/home',
+        //     component: Home,
+        //     hidden: true,
+        //     children: [{
+        //         path: '/stylesetting',
+        //         component: stylesetting
 
-            }]
-        },
-        // -------------------下面的是游客的路由---------------------------
-        {
-            path: '/main',
-            component: main,
-            children: [{
-                path: '/about',
-                component: (resolve) => {
-                    require(['../components/Visitor/page/about.vue'], resolve);
-                }
-            }],
-            hidden: true,
-        },
-        {
-            path: '/main',
-            component: main,
-            children: [{
-                path: '/index',
-                component: (resolve) => {
-                    require(['../components/Visitor/page/index.vue'], resolve);
-                }
-            }],
-            hidden: true,
-        },
-        {
-            path: '/main',
-            component: main,
-            children: [{
-                path: '/blog',
-                component: blog,
-            }],
-            hidden: true,
-        },
-        {
-            path: '/main',
-            component: main,
-            children: [{
-                path: '/detail/:id',
-                name: 'detail',
-                component: (resolve) => {
-                    require(["../components/Visitor/page/detail.vue"], resolve);
-                }
-            }],
-            hidden: true,
+        //     }]
+        // },
+        // // -------------------下面的是游客的路由---------------------------
+        // {
+        //     path: '/main',
+        //     component: main,
+        //     children: [{
+        //         path: '/about',
+        //         component: (resolve) => {
+        //             require(['../components/Visitor/page/about.vue'], resolve);
+        //         }
+        //     }],
+        //     hidden: true,
+        // },
+        // {
+        //     path: '/main',
+        //     component: main,
+        //     children: [{
+        //         path: '/index',
+        //         component: (resolve) => {
+        //             require(['../components/Visitor/page/index.vue'], resolve);
+        //         }
+        //     }],
+        //     hidden: true,
+        // },
+        // {
+        //     path: '/main',
+        //     component: main,
+        //     children: [{
+        //         path: '/blog',
+        //         component: blog,
+        //     }],
+        //     hidden: true,
+        // },
+        // {
+        //     path: '/main',
+        //     component: main,
+        //     children: [{
+        //         path: '/detail/:id',
+        //         name: 'detail',
+        //         component: (resolve) => {
+        //             require(["../components/Visitor/page/detail.vue"], resolve);
+        //         }
+        //     }],
+        //     hidden: true,
 
-        },
+        // },
         // {
         //     path: '/shot',
         //     name: 'shot',
