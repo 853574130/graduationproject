@@ -1,55 +1,50 @@
 <template>
   <el-container class="dashboard">
     <el-main class="main">
-        
-        <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-  <el-menu-item index="/userinfo">基本资料</el-menu-item>
 
-  <el-menu-item index="/editpwd" >密码修改</el-menu-item>
-</el-menu>
+      <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu-item index="/userinfo">基本资料</el-menu-item>
 
-<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-  <el-form-item label="用户名:" prop="name">
-    <el-input v-model="ruleForm.name"></el-input>
-  </el-form-item>
-  
-  <el-form-item label="显示名称"  prop="nickname">
-      <template>
-      <el-popover
-    placement="top-start"
-    title="标题"
-    width="200"
-    trigger="hover"
-    content="这是博客显示的名字。">
-      <i class="el-icon-question" style="display:inline"></i>
-  </el-popover>
-  </template>
-    <el-input  v-model="ruleForm.nickname"></el-input>
-  </el-form-item>
+        <el-menu-item index="/editpwd">密码修改</el-menu-item>
+      </el-menu>
 
-  <el-form-item label="邮箱:" prop="email">
-    <el-input v-model="ruleForm.email"></el-input>
-  </el-form-item>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="用户名:" prop="name">
+          <el-input v-model="ruleForm.name"></el-input>
+        </el-form-item>
 
-  <el-form-item label="头像:" prop="portrait">
-    <el-input v-model="ruleForm.portrait"></el-input>
-  </el-form-item>
+        <el-form-item label="显示名称" prop="nickname">
+          <template>
+            <el-popover placement="top-start" title="标题" width="200" trigger="hover" content="这是博客显示的名字。">
+              <i class="el-icon-question" style="display:inline"></i>
+            </el-popover>
+          </template>
+          <el-input v-model="ruleForm.nickname"></el-input>
+        </el-form-item>
 
-  <el-form-item label="个人说明:" prop="describe">
-    <el-input type="textarea" v-model="ruleForm.describe"></el-input>
-  </el-form-item>
+        <el-form-item label="邮箱:" prop="email">
+          <el-input v-model="ruleForm.email"></el-input>
+        </el-form-item>
 
-  <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
-    <!-- <el-button @click="resetForm('ruleForm')">恢复当前</el-button> -->
-  </el-form-item>
-</el-form>
+        <el-form-item label="头像:" prop="portrait">
+          <el-input v-model="ruleForm.portrait"></el-input>
+        </el-form-item>
+
+        <el-form-item label="个人说明:" prop="describe">
+          <el-input type="textarea" v-model="ruleForm.describe"></el-input>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
+          <!-- <el-button @click="resetForm('ruleForm')">恢复当前</el-button> -->
+        </el-form-item>
+      </el-form>
 
     </el-main>
   </el-container>
 </template>
 <script>
-import BlogTable from "@/components/Console/BlogTable";
+import BlogTable from "@/components/Console/Article/BlogTable";
 import BlogCfg from "@/components/Console/BlogCfg";
  import {postRequest} from '../../utils/api'
   import {putRequest} from '../../utils/api'

@@ -7,15 +7,16 @@
     </el-col>
     <el-col :span="24">
       <div>
-        <div><h3 style="margin-top: 0px;margin-bottom: 0px">{{article.title}}</h3></div>
+        <div>
+          <h3 style="margin-top: 0px;margin-bottom: 0px">{{article.title}}</h3>
+        </div>
         <div style="width: 100%;margin-top: 5px;display: flex;justify-content: flex-end;align-items: center">
           <div style="display: inline; color: #20a0ff;margin-left: 50px;margin-right:20px;font-size: 12px;">
             {{article.nickname}}
           </div>
           <span style="color: #20a0ff;margin-right:20px;font-size: 12px;">浏览 {{article.pageView==null?0:article.pageView}}</span>
           <span style="color: #20a0ff;margin-right:20px;font-size: 12px;"> {{article.editTime | formatDateTime}}</span>
-          <el-tag type="success" v-for="(item,index) in article.tags" :key="index" size="small"
-                  style="margin-left: 8px">{{item.tagName}}
+          <el-tag type="success" v-for="(item,index) in article.tags" :key="index" size="small" style="margin-left: 8px">{{item.tagName}}
           </el-tag>
           <span style="margin:0px 50px 0px 0px"></span>
         </div>
@@ -28,10 +29,10 @@
   </el-row>
 </template>
 <script>
- import {postRequest} from '../../utils/api'
-  import {putRequest} from '../../utils/api'
-  import {deleteRequest} from '../../utils/api'
-  import {getRequest} from '../../utils/api'
+ import {postRequest} from '../../../utils/api'
+  import {putRequest} from '../../../utils/api'
+  import {deleteRequest} from '../../../utils/api'
+  import {getRequest} from '../../../utils/api'
   export default{
     methods: {
       goBack(){
@@ -41,16 +42,16 @@
     mounted: function () {
       var aid = this.$route.query.aid;
       this.activeName = this.$route.query.an
-      var _this = this;
-      this.loading = true;
-      getRequest("/article/" + aid).then(resp=> {
+      this.loading = true;      
+      getRequest("api/article/" + aid).then(resp=> {
         if (resp.status == 200) {
-          _this.article = resp.data;
+          this.article = resp.data;
+      console.log("resp-----------",resp);
         }
-        _this.loading = false;
+        this.loading = false;
       }, resp=> {
-        _this.loading = false;
-        _this.$message({type: 'error', message: '页面加载失败!'});
+        this.loading = false;
+        this.$message({type: 'error', message: '页面加载失败!'});
       });
     },
     data(){

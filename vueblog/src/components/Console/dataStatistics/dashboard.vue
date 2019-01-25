@@ -1,23 +1,23 @@
 <template>
   <el-container class="dashboard">
     <el-main class="main">
-     仪表盘
+      仪表盘
       <el-button type="primary" icon="el-icon-refresh
 " size="small" style="margin-left: 3px;align:right;" @click="switchview">切换图表视图
       </el-button>
 
-    <el-card class="box-card">
-    <div class="text item">
-      文章
-    </div>
-  </el-card>
-  <el-card class="box-card">
-    <div class="text item">
-      附件
-    </div>
-  </el-card>
-  
-  <!--<el-card class="box-card">
+      <el-card class="box-card">
+        <div class="text item">
+          文章
+        </div>
+      </el-card>
+      <el-card class="box-card">
+        <div class="text item">
+          附件
+        </div>
+      </el-card>
+
+      <!--<el-card class="box-card">
     <div class="text item">
       评论
     </div>
@@ -32,7 +32,7 @@
   </el-container>
 </template>
 <script>
-  import BlogTable from '@/components/Console/BlogTable'
+  import BlogTable from '@/components/Console/Article/BlogTable'
   import BlogCfg from '@/components/Console/BlogCfg'
 import { postRequest } from "../../../utils/api";
 import { putRequest } from "../../../utils/api";
@@ -69,25 +69,25 @@ import { getRequest } from "../../../utils/api";
   };
 </script>
 <style>
-  .article_list > .header {
-    background-color: #ececec;
-    margin-top: 10px;
-    padding-left: 5px;
-    display: flex;
-    justify-content: flex-start;
-  }
+.article_list > .header {
+  background-color: #ececec;
+  margin-top: 10px;
+  padding-left: 5px;
+  display: flex;
+  justify-content: flex-start;
+}
 
-  .article_list > .main {
-    /*justify-content: flex-start;*/
-    display: flex;
-    flex-direction: column;
-    padding-left: 0px;
-    background-color: #fff;
-    padding-top: 0px;
-    margin-top: 8px;
-  }
+.article_list > .main {
+  /*justify-content: flex-start;*/
+  display: flex;
+  flex-direction: column;
+  padding-left: 0px;
+  background-color: #fff;
+  padding-top: 0px;
+  margin-top: 8px;
+}
 
-  .box-card {
-    width: 480px;
-  }
+.box-card {
+  width: 480px;
+}
 </style>

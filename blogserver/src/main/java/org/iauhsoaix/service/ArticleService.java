@@ -130,7 +130,7 @@ public class ArticleService extends BaseService<ArticleEntity, ArticleInfo> {
 
     public Article getArticleById(Long aid) {
         Article article = articleMapper.getArticleById(aid);
-        articleMapper.pvIncrement(aid);
+//        articleMapper.pvIncrement(aid);
         return article;
     }
 

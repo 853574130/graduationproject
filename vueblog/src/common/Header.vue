@@ -26,7 +26,7 @@
                 <!-- 用户名下拉菜单 -->
                 <el-dropdown @command="handleCommand">
                     <span class="el-dropdown-link home_userinfo">
-                        {{currentUserName}}
+                        <!-- {{currentUserName}} -->
                         <i class="el-icon-arrow-down el-icon--right home_userinfo"></i>
                     </span>
                     <!-- <el-dropdown-menu slot="dropdown">

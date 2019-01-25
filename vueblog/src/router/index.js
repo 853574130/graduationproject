@@ -11,7 +11,6 @@ import Attach from '../components/Console/Attach'
 // import dashboard from '../components/Console/dashboard'
 import PostArticle from '@/components/Console/Article/PostArticle'
 import UserMana from '@/components/Console/usermanager/UserMana'
-import BlogDetail from '@/components/Console/BlogDetail'
 import UserInfo from '@/components/Console/UserInfo'
 import editpwd from '@/components/Console/editpassword'
 import Main from '@/components/Visitor/Main'
@@ -28,10 +27,20 @@ export default new Router({
         path: '/',
         redirect: '/dashboard'
     },
+
+    {
+        path: '*',
+        redirect: '/404'
+
+    },
+    {
+        path: "/404",
+        component: resolve => require(["../common/404.vue"], resolve)
+    },
     {
         path: '/login',
-        name: '登录',
-        hidden: true,
+        // name: '登录',
+        // hidden: true,
         component: Login
     },
     {
@@ -48,42 +57,52 @@ export default new Router({
                 title: "系统首页"
             }
         },
+        {
+            path: '/articleList',
+            // component: ArticleList,
+            component: resolve => require(["../components/Console/Article/ArticleList"], resolve),
+            meta: {
+                keepAlive: true,
+                name: '文章列表',
+            }
+        },
+        {
+            path: '/postArticle',
+            component: resolve => require(["../components/Console/Article/PostArticle"], resolve),
+            meta: {
+                keepAlive: true,
+                name: '文章列表',
+            }
+        },
+        {
+            path: '/postArticle',
+            name: '发表文章',
+            component: PostArticle,
+            meta: {
+                keepAlive: false
+            }
+        }, {
+            path: '/blogDetail',
+            name: '博客详情',
+            component: resolve => require(["../components/Console/Article/BlogDetail"], resolve),
+            hidden: true,
+            meta: {
+                keepAlive: false
+            }
+        }, {
+            path: '/editBlog',
+            name: '编辑博客',
+            component: PostArticle,
+            hidden: true,
+            meta: {
+                keepAlive: false
+            }
+        }
         ]
     },
-        // {
-        //     path: '/home',
-        //     component: Home,
-        //     // name: '栏目管理',
-        //     children: [{
-        //         path: '/dashboard',
-        //         name: '仪表盘',
-        //         component: dashboard,
-        //         hidden: true,
-        //         // children: [{
-        //         //     path: '/articleList',
-        //         //     name: '文章列表',
-        //         //     component: ArticleList,
-        //         //     meta: {
-        //         //         keepAlive: true
-        //         //     }
-        //         // }]
 
-        //     }]
-        // },
 
-        // {
-        //     path: '/home',
-        //     component: Home,
-        //     name: '文章管理',
-        //     iconCls: 'fa fa-file-text-o',
-        //     children: [{
-        //         path: '/articleList',
-        //         name: '文章列表',
-        //         component: ArticleList,
-        //         meta: {
-        //             keepAlive: true
-        //         }
-        //     }, {
+        // , {
         //         path: '/postArticle',
         //         name: '发表文章',
         //         component: PostArticle,
@@ -106,7 +125,8 @@ export default new Router({
         //         meta: {
         //             keepAlive: false
         //         }
-        //     }]
+        //     }
+        // ]
         // },
         // {
         //     path: '/home',

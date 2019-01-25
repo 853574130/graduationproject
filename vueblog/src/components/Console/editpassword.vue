@@ -1,35 +1,35 @@
 <template>
   <el-container class="dashboard">
     <el-main class="main">
-       
-        <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-  <el-menu-item index="/userinfo">基本资料</el-menu-item>
 
-  <el-menu-item index="/editpwd" >密码修改</el-menu-item>
-</el-menu>
-<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu-item index="/userinfo">基本资料</el-menu-item>
 
-<el-form-item label="原密码:" prop="oldpwd">
-    <el-input type="password" v-model="ruleForm.oldpwd"></el-input>
-  </el-form-item>
+        <el-menu-item index="/editpwd">密码修改</el-menu-item>
+      </el-menu>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
 
-  <el-form-item label="新密码:" prop="newpwed">
-    <el-input type="password" v-model="ruleForm.newpwed"></el-input>
-  </el-form-item>
+        <el-form-item label="原密码:" prop="oldpwd">
+          <el-input type="password" v-model="ruleForm.oldpwd"></el-input>
+        </el-form-item>
 
-   <el-form-item label="确认新密码:" prop="verify">
-    <el-input type="password" v-model="ruleForm.verify"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
-    <el-button @click="goback()">取消</el-button>
-  </el-form-item>
-</el-form>
+        <el-form-item label="新密码:" prop="newpwed">
+          <el-input type="password" v-model="ruleForm.newpwed"></el-input>
+        </el-form-item>
+
+        <el-form-item label="确认新密码:" prop="verify">
+          <el-input type="password" v-model="ruleForm.verify"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
+          <el-button @click="goback()">取消</el-button>
+        </el-form-item>
+      </el-form>
     </el-main>
   </el-container>
 </template>
 <script>
-import BlogTable from "@/components/Console/BlogTable";
+import BlogTable from "@/components/Console/Article/BlogTable";
 import BlogCfg from "@/components/Console/BlogCfg";
  import {postRequest} from '../../utils/api'
   import {putRequest} from '../../utils/api'

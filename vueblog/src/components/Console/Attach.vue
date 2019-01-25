@@ -1,25 +1,16 @@
 <template>
   <el-container class="dashboard">
     <el-main class="main">
-        <el-upload
-  class="upload-demo"
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :before-remove="beforeRemove"
-  multiple
-  :limit="3"
-  :on-exceed="handleExceed"
-  :file-list="fileList">
-  <el-button size="small" type="primary">点击上传</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-</el-upload>
+      <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" :on-preview="handlePreview" :on-remove="handleRemove" :before-remove="beforeRemove" multiple :limit="3" :on-exceed="handleExceed" :file-list="fileList">
+        <el-button size="small" type="primary">点击上传</el-button>
+        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+      </el-upload>
 
     </el-main>
   </el-container>
 </template>
 <script>
-  import BlogTable from '@/components/Console/BlogTable'
+  import BlogTable from '@/components/Console/Article/BlogTable'
   import BlogCfg from '@/components/Console/BlogCfg'
   import {postRequest} from '../../utils/api'
   import {putRequest} from '../../utils/api'
@@ -66,25 +57,25 @@
   };
 </script>
 <style>
-  .article_list > .header {
-    background-color: #ececec;
-    margin-top: 10px;
-    padding-left: 5px;
-    display: flex;
-    justify-content: flex-start;
-  }
+.article_list > .header {
+  background-color: #ececec;
+  margin-top: 10px;
+  padding-left: 5px;
+  display: flex;
+  justify-content: flex-start;
+}
 
-  .article_list > .main {
-    /*justify-content: flex-start;*/
-    display: flex;
-    flex-direction: column;
-    padding-left: 0px;
-    background-color: #fff;
-    padding-top: 0px;
-    margin-top: 8px;
-  }
+.article_list > .main {
+  /*justify-content: flex-start;*/
+  display: flex;
+  flex-direction: column;
+  padding-left: 0px;
+  background-color: #fff;
+  padding-top: 0px;
+  margin-top: 8px;
+}
 
-  .box-card {
-    width: 480px;
-  }
+.box-card {
+  width: 480px;
+}
 </style>

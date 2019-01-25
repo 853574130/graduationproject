@@ -40,18 +40,24 @@
     </el-menu>
   </div>
 </template>
+<style>
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
+</style>
 
 <script>
 import bus from "../common/bus";
-export default {
-  data() {
-    return {
-      collapse: false,
-      items: [
+  export default {
+    data() {
+      return {
+        collapse: false,
+         items: [
         {
           icon: "el-icon-setting",
           index: "dashboard",
-          title: "系统首页"
+          title: "仪表盘"
         },
         {
           icon: "el-icon-setting",
@@ -60,7 +66,7 @@ export default {
           subs: [
             {
               icon: "el-icon-setting",
-              index: "company",
+              index: "PostArticle",
               title: "系统设置"
             },
             {
@@ -69,19 +75,21 @@ export default {
               title: "账号管理"
             }
           ]
+        },
+        {
+          icon: "el-icon-setting",
+          index: "articleList",
+          title: "文章管理",
+        },
+        {
+          icon: "el-icon-setting",
+          index: "2",
+          title: "附件管理",
         }
-      ]
-    };
-  },
-methods:{
-  handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
-},
-  computed: {
+        ]
+      };
+    },
+    computed: {
     onRoutes() {
       return this.$route.path.replace("/", "");
     },
@@ -92,7 +100,7 @@ methods:{
       }
       let newItems = new Array();
       newItems.push(this.items[0]);
-      for (let i = 1; i <= 10; i++) {
+      for (let i = 1; i <= 3; i++) {
         let value = 1 << (i - 1);
         let hasRole = role & value;
         if (hasRole > 0) {
@@ -102,7 +110,16 @@ methods:{
       return newItems;
     }
   },
-  created() {
+    methods: {
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
+,
+created() {
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏
     bus.$on("collapse", msg => {
       this.collapse = msg;

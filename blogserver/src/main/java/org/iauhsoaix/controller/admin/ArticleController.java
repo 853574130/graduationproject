@@ -41,6 +41,13 @@ public class ArticleController extends BaseController<ArticleEntity, ArticleInfo
     @Autowired
     ArticleService articleService;
 
+    @RequestMapping(value = "/getAllArticleByAdmin", method = RequestMethod.POST)
+    public Result<Pager<ArticleInfo>> getAllArticleByAdmin(ArticleInfo search) {
+        List<ArticleInfo> list = articleService.getListBy(search);
+        Pager<ArticleInfo> pager = new Pager(1, 20, 1, list);
+        return ResultUtils.success(pager);
+    }
+
 //    @RequestMapping(value = "/", method = RequestMethod.POST)
 //    public RespBean addNewArticle(Article article) {
 //        int result = articleService.addNewArticle(article);
@@ -81,17 +88,6 @@ public class ArticleController extends BaseController<ArticleEntity, ArticleInfo
             e.printStackTrace();
         }
         return new RespBean("error", "上传失败!");
-    }
-
-    /**
-     * @Author:iauhsoaix
-     * @date 2018/12/5
-     * @Description:这个方法后期要废弃
-     */
-    @RequestMapping(value = "/adminArticlList")
-    public Result<Pager<ArticleInfo>> getAdminArticlList(ArticleInfo search,Integer pageNum) {
-//        List allList= articleService.getListBy(search);
-        return null;
     }
 
 

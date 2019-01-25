@@ -25,7 +25,7 @@
   </el-container>
 </template>
 <script>
-  import BlogTable from '@/components/Console/BlogTable'
+  import BlogTable from '@/components/Console/Article/BlogTable'
   import BlogCfg from '@/components/Console/BlogCfg'
   import {postRequest} from '../../../utils/api'
   import {putRequest} from '../../../utils/api'
@@ -42,7 +42,8 @@
     },
     data() {
       return {
-        activeName: 'post',
+        activeName: 'all',
+        //当前激活的列表
         isAdmin: false
       };
     },
@@ -58,21 +59,21 @@
   };
 </script>
 <style>
-  .article_list > .header {
-    background-color: #ececec;
-    margin-top: 10px;
-    padding-left: 5px;
-    display: flex;
-    justify-content: flex-start;
-  }
+.article_list > .header {
+  background-color: #ececec;
+  margin-top: 10px;
+  padding-left: 5px;
+  display: flex;
+  justify-content: flex-start;
+}
 
-  .article_list > .main {
-    /*justify-content: flex-start;*/
-    display: flex;
-    flex-direction: column;
-    padding-left: 0px;
-    background-color: #fff;
-    padding-top: 0px;
-    margin-top: 8px;
-  }
+.article_list > .main {
+  /*justify-content: flex-start;*/
+  display: flex;
+  flex-direction: column;
+  padding-left: 0px;
+  background-color: #fff;
+  padding-top: 0px;
+  margin-top: 8px;
+}
 </style>
