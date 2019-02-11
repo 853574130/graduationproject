@@ -19,6 +19,7 @@ public class ArticleEntity extends AbstractEntity {
     @Column(name = "article_markdown_content")
     private String articleMarkdownContent;
 
+
     /**
      *
      */
@@ -60,6 +61,16 @@ public class ArticleEntity extends AbstractEntity {
     @Column(name = "status")
     private Integer status;
 
+    @Column(name = "type")
+    private Integer type;
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
     public String getArticleTitle() {
         return articleTitle;

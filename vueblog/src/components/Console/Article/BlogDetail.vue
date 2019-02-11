@@ -8,7 +8,7 @@
     <el-col :span="24">
       <div>
         <div>
-          <h3 style="margin-top: 0px;margin-bottom: 0px">{{article.title}}</h3>
+          <h3 style="margin-top: 0px;margin-bottom: 0px">{{article.articleTitle}}</h3>
         </div>
         <div style="width: 100%;margin-top: 5px;display: flex;justify-content: flex-end;align-items: center">
           <div style="display: inline; color: #20a0ff;margin-left: 50px;margin-right:20px;font-size: 12px;">
@@ -23,7 +23,7 @@
       </div>
     </el-col>
     <el-col>
-      <div style="text-align: left" v-html="article.htmlContent">
+      <div style="text-align: left" v-html="article.articleHtmlContent">
       </div>
     </el-col>
   </el-row>
@@ -46,7 +46,7 @@
       getRequest("api/article/" + aid).then(resp=> {
         if (resp.status == 200) {
           this.article = resp.data;
-      console.log("resp-----------",resp);
+      // console.log("resp-----------",resp);
         }
         this.loading = false;
       }, resp=> {

@@ -25,6 +25,24 @@ public class ArticleInfo extends BaseInfo {
 
     private Integer status;
     private Date updated;
+    private Integer type;
+//    private String authorName;
+//
+//    public String getAuthorName() {
+//        return authorName;
+//    }
+//可能不需要
+//    public void setAuthorName(String authorName) {
+//        this.authorName = authorName;
+//    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
     public Date getUpdated() {
         return updated;

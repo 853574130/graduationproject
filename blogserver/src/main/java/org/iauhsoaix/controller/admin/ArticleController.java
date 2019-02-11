@@ -92,16 +92,18 @@ public class ArticleController extends BaseController<ArticleEntity, ArticleInfo
 
 
     @RequestMapping(value = "/{aid}", method = RequestMethod.GET)
-    public Article getArticleById(@PathVariable Long aid) {
+    public ArticleInfo getArticleById(@PathVariable Long aid) {
+
         return articleService.getArticleById(aid);
     }
 
-    @RequestMapping(value = "/dustbin", method = RequestMethod.PUT)
-    public RespBean updateArticleState(Long[] aids, Integer state) {
-        if (articleService.updateArticleState(aids, state) == aids.length) {
-            return new RespBean("success", "删除成功!");
-        }
-        return new RespBean("error", "删除失败!");
+    @RequestMapping(value = "/logicalDel", method = RequestMethod.POST)
+    public Result<Void> logicalDel(Long aids) {
+        ArticleInfo info = articleService.getModel(aids);
+        info.setStatus(2);
+        articleService.saveOrUpdate(info);
+        return ResultUtils.success();
+
     }
 
 //    @RequestMapping("/dataStatistics")

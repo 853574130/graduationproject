@@ -2,6 +2,7 @@ package org.iauhsoaix.dal.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.iauhsoaix.oldbean.Article;
 import org.iauhsoaix.dal.entity.ArticleEntity;
 import org.iauhsoaix.utils.BasicMapper;
@@ -28,6 +29,31 @@ public interface ArticleMapper extends BasicMapper<ArticleEntity> {
     int deleteArticleById(@Param("aids") Long[] aids);
 
     Article getArticleById(Long aid);
+
+    /*
+    * <select id="getArticleById" parameterType="Long" resultMap="BaseResultMap">
+        SELECT a.*,t.`tagName`,t.`id` AS tid,u.`nickname`,c.`cateName` FROM article a LEFT JOIN article_tags ats ON a.`id`=ats.`aid` LEFT JOIN tags t ON ats.`tid`=t.`id` LEFT JOIN user u ON a.`uid`=u.`id` LEFT JOIN category c ON a.`cid`=c.`id` WHERE a.id=#{aid}
+    </select>
+    <resultMap id="BaseResultMap" type="org.iauhsoaix.oldbean.Article">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="cid" property="cid"/>
+        <result column="uid" property="uid"/>
+        <result column="publishDate" property="publishDate"/>
+        <result column="editTime" property="editTime"/>
+        <result column="state" property="state"/>
+        <result column="pageView" property="pageView"/>
+        <result column="mdContent" property="mdContent"/>
+        <result column="htmlContent" property="htmlContent"/>
+        <result column="summary" property="summary"/>
+        <result column="nickname" property="nickname"/>
+        <result column="cateName" property="cateName"/>
+        <collection property="tags" ofType="org.iauhsoaix.oldbean.Tags" column="tagName">
+            <id property="id" column="tid"/>
+            <result property="tagName" column="tagName"/>
+        </collection>
+    </resultMap>
+    */
 
     void pvIncrement(Long aid);
 

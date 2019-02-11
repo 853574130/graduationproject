@@ -128,9 +128,8 @@ public class ArticleService extends BaseService<ArticleEntity, ArticleInfo> {
         }
     }
 
-    public Article getArticleById(Long aid) {
-        Article article = articleMapper.getArticleById(aid);
-//        articleMapper.pvIncrement(aid);
+    public ArticleInfo getArticleById(Long aid) {
+        ArticleInfo article=this.getModel(aid);
         return article;
     }
 
