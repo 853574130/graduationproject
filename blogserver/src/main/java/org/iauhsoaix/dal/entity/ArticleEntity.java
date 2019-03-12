@@ -5,7 +5,6 @@ import javax.persistence.Table;
 import java.util.Date;
 @Table(name = "article")
 public class ArticleEntity extends AbstractEntity {
-//    private Integer id;
 
     /**
      *
@@ -27,10 +26,10 @@ public class ArticleEntity extends AbstractEntity {
     private String articleHtmlContent;
 
     /**
-     *
+     *这个先注掉  待实现   数据库中还没有这个字段
      */
-    @Column(name = "article_summary")
-    private String articleSummary;
+//    @Column(name = "article_summary")
+//    private String articleSummary;
     /**
      *
      */
@@ -94,14 +93,6 @@ public class ArticleEntity extends AbstractEntity {
 
     public void setArticleHtmlContent(String articleHtmlContent) {
         this.articleHtmlContent = articleHtmlContent;
-    }
-
-    public String getArticleSummary() {
-        return articleSummary;
-    }
-
-    public void setArticleSummary(String articleSummary) {
-        this.articleSummary = articleSummary;
     }
 
     public String getUserId() {

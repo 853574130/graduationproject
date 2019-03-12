@@ -2,17 +2,31 @@
   <el-container class="article_list">
     <el-main class="main">
       <el-tabs v-model="activeName" @tab-click="handleClick" type="card">
-        <el-tab-pane label="全部文章" name="all">
-          <blog_table state="-1" :showEdit="false" :showDelete="false" :activeName="activeName"></blog_table>
+        <el-tab-pane label="全部文章" name="all" @tab-click="handleClick">
+          <template>          
+          <blog_table state="-1" :showEdit="false" :showDelete="false" :activeName="activeName" v-show="activeName=='all'"></blog_table>
+          </template>
+          
+          <!-- <h1 v-show="activeName=='all'">all</h1> -->
+        
         </el-tab-pane>
-        <el-tab-pane label="已发表" name="post">
-          <blog_table state="1" :showEdit="true" :showDelete="true" :activeName="activeName"></blog_table>
+        <el-tab-pane label="已发表" name="post" @tab-click="handleClick">
+          <template>
+          <blog_table state="1" :showEdit="true" :showDelete="true" :activeName="activeName" v-show="activeName=='post'"></blog_table>
+          </template>
+          
+          <!-- <h1 v-show="activeName=='post'">post</h1> -->
+        
         </el-tab-pane>
-        <el-tab-pane label="草稿箱" name="draft">
-          <blog_table state="0" :showEdit="true" :showDelete="true" :activeName="activeName"></blog_table>
+        <el-tab-pane label="草稿箱" name="draft" @tab-click="handleClick">
+          <template>
+          <blog_table state="0" :showEdit="true" :showDelete="true" :activeName="activeName" v-show="activeName=='draft'"></blog_table>
+          </template>
+          <!-- <h1 v-show="activeName=='draft'">all</h1> -->
+        
         </el-tab-pane>
-        <el-tab-pane label="回收站" name="dustbin">
-          <blog_table state="2" :showEdit="false" :showDelete="true" :activeName="activeName"></blog_table>
+        <el-tab-pane label="回收站" name="dustbin" @tab-click="handleClick">
+          <!-- <blog_table state="2" :showEdit="false" :showDelete="true" :activeName="activeName" v-show="activeName=='dustbin'"></blog_table> -->
         </el-tab-pane>
         <!-- <el-tab-pane label="博客管理" name="blogmana" v-if="isAdmin">
           <blog_table state="-2" :showEdit="false" :showDelete="true" :activeName="activeName"></blog_table>
@@ -33,11 +47,11 @@
   import {getRequest} from '../../../utils/api'
   export default {
     mounted: function () {
-      getRequest("/isAdmin").then(resp=> {
-        if (resp.status == 200) {
-          this.isAdmin = resp.data;
-        }
-      })
+      // getRequest("/isAdmin").then(resp=> {
+      //   if (resp.status == 200) {
+      //     this.isAdmin = resp.data;
+      //   }
+      // })
     },
     data() {
       return {
@@ -48,7 +62,8 @@
     },
     methods: {
       handleClick(tab, event) {
-//        console.log(tab, event);
+        // "第"+event+"被点击了"
+      this.$message.success(this.activeName)
       }
     },
     components: {

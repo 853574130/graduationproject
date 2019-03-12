@@ -81,10 +81,10 @@
     mounted: function () {
       this.loading = true;
       this.loadBlogs(1, this.pageSize);
-      window.bus.$on('blogTableReload', function () {
-        this.loading = true;
-        this.loadBlogs(this.currentPage, this.pageSize);
-      })
+      // window.bus.$on('blogTableReload', function () {
+      //   this.loading = true;
+      //   this.loadBlogs(this.currentPage, this.pageSize);
+      // })
     },
     filters:{
       formatType(val){
@@ -129,6 +129,7 @@
           url = "/api/article/getAllArticleByAdmin"
           this.search.search=null;
         }
+        //这里发送了多个请求  是面板加载的时候全部一起加载了  这样不合理，浪费资源
         postRequest(url,this.search,this.pageNum).then(resp=> {
           this.loading = false;
           if (resp.status == 200) {

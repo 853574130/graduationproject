@@ -5,20 +5,16 @@ CREATE TABLE `article` (
   `article_markdown_content` text COMMENT '文章内容 Markdown格式',
   `article_html_content` text COMMENT '文章内容 html格式',
   #`article_summary` text COMMENT '文章摘要',
-  #`cid` int(11) DEFAULT NULL COMMENT '',
   `user_id` int(11) DEFAULT NULL COMMENT '发表用户 多对一',
+  `type` int(11) DEFAULT NULL COMMENT '文章分类（类型）  一篇文章可以放入多个分类',
   `commented` int(1) DEFAULT '0' COMMENT '文章能否被评论',
   `article_thumbnail` varchar(11) DEFAULT '' COMMENT '文章能否被评论',
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `status` int(11) DEFAULT NULL COMMENT '0表示草稿箱，1表示已发表，2表示已删除,3表示不公开',
+  `status` int(11) DEFAULT 3 COMMENT '0表示草稿箱，1表示已发表，2表示已删除,3表示不公开',
   `pageView` int(11) DEFAULT '0' COMMENT '文章访问量',
   PRIMARY KEY (`id`)
-  #KEY `cid` (`cid`),
-  #KEY `user_id` (`user_id`),
-  #CONSTRAINT `article_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `category` (`id`),
-  #CONSTRAINT `article_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `article_tags`;
 CREATE TABLE `article_tags` (

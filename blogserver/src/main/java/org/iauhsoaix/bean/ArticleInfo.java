@@ -13,7 +13,7 @@ public class ArticleInfo extends BaseInfo {
 
     private String articleHtmlContent;
 
-    private String articleSummary;
+//    private String articleSummary;
 
     private String userId;
 
@@ -74,14 +74,6 @@ public class ArticleInfo extends BaseInfo {
 
     public void setArticleHtmlContent(String articleHtmlContent) {
         this.articleHtmlContent = articleHtmlContent;
-    }
-
-    public String getArticleSummary() {
-        return articleSummary;
-    }
-
-    public void setArticleSummary(String articleSummary) {
-        this.articleSummary = articleSummary;
     }
 
     public String getUserId() {
