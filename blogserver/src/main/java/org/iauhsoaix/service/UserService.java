@@ -27,13 +27,13 @@ public class UserService  {
 
     public UserInfo getLoginUser(String account, String password) throws CommonBusinessException {
         UserEntity userEntity = userManager.getUserByAccount(account);
-//        if (userEntity == null) {
-//            throw new CommonBusinessException("用户账号不存在");
-//        } else if (!userEntity.getPassword().equals(password)) {
-//            throw new CommonBusinessException("密码错误");
-//        } else if (userEntity.getStatus() > 0) {
-//            throw new CommonBusinessException("用户已失效");
-//        }
+        if (userEntity == null) {
+            throw new CommonBusinessException("用户账号不存在");
+        } else if (!userEntity.getPassword().equals(password)) {
+            throw new CommonBusinessException("密码错误");
+        } else if (userEntity.getStatus() == 0) {
+            throw new CommonBusinessException("用户已失效");
+        }
         return ExchangeUtils.exchangeObject(userEntity, UserInfo.class);
     }
 
@@ -76,8 +76,5 @@ public class UserService  {
     	userManager.changePassword(id,password);
 	}
 
-	public UserInfo searchByEmployeNumber(Integer employeeNumber,Integer companyId){
-    	return userManager.searchByEmployeNumber(employeeNumber,companyId);
-	}
 
 }

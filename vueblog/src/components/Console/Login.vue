@@ -12,6 +12,7 @@
       <el-form-item style="width: 100%">
         <el-button type="primary" @click.native.prevent="submitClick" style="width: 100%">登录</el-button>
       </el-form-item>
+      
     </el-form>
   </div>
 </template>
@@ -21,13 +22,11 @@
   import {deleteRequest} from '../../utils/api'
   import {getRequest} from '../../utils/api'
   export default{
-    data(){
+    data(){ 
       return {
         rules: {
           username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
           password: [{required: true, message: '请输入密码', trigger: 'blur'}]
-          
-
         },
         checked: true,
         loginForm: {
@@ -39,42 +38,21 @@
     },
     methods: {
       submitClick: function () {
-        var _this = this;
         this.loading = true;
-        // postRequest('/hello2').then(resp=> {});
-
         postRequest('/api/login', {
           account: this.loginForm.username,
           password: this.loginForm.password
         }).then(resp=> {
-          _this.loading = false;
-            console.log("resp",resp);
+          this.loading = false;
+            // console.log("resp",resp);
           if (resp.data.code == 1000) {
-                                localStorage.setItem('ms_username',this.loginForm.username);
-                                localStorage.setItem('ms_role',resp.data.data.role);
-                                this.$router.push('/articleList');
-                            } else if (res.data.code == 1001){
-                                this.msg = res.data.message;
-                            }
-
-          // if (resp.status == 200) {
-          //   //成功
-          //   console.log("resp",resp);
-            
-          //   var json = resp.data;
-          //   if (json.status == 'success') {
-          //     _this.$router.replace({path: '/home'});
-          //   } else {
-          //     _this.$alert('登录失败!1', '失败!');
-          //     // console.log();
-              
-          //   }
-          // }
+            localStorage.setItem('ms_username',this.loginForm.username);
+            localStorage.setItem('ms_role',resp.data.data.role);
+            this.$router.push('/articleList');
+        } else {
+            this.$message.error(resp.data.message) ;
         }
-        // , resp=> {
-        //   _this.loading = false;
-        //   _this.$alert('找不到服务器⊙﹏⊙∥!', '失败!');
-        // }
+        }
         );
       }
     }

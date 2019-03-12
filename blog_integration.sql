@@ -102,9 +102,8 @@ CREATE TABLE `tags` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(64) DEFAULT NULL COMMENT '用户名',
-  `user_account` varchar(64) DEFAULT NULL COMMENT '用户账号',
-  #`nickname` varchar(64) DEFAULT NULL COMMENT '显示昵称',
+  `user_name` varchar(64) DEFAULT NULL COMMENT '用户名  其实就是账号，登录名',
+  `nickname` varchar(64) DEFAULT NULL COMMENT '显示昵称',
   `password` varchar(255) DEFAULT NULL COMMENT '密码',
   `type` varchar(10) DEFAULT 0 COMMENT '类型，0普通账号，10管理员,有待商榷，这里应该可以直接省略，权限用role的值来表示就行',
   #`enabled` tinyint(1) DEFAULT '1' COMMENT '日志标题',
@@ -115,7 +114,7 @@ CREATE TABLE `user` (
   `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `status` int(1) NOT NULL DEFAULT '1' COMMENT '状态，1：正常，0：禁用',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `log`;
 CREATE TABLE `log` (

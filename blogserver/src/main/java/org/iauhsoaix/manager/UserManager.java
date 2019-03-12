@@ -40,7 +40,5 @@ public class UserManager {
 		userMapper.changePassword(id,password);
 	}
 
-	public UserInfo searchByEmployeNumber(Integer employeeNumber, Integer companyId){
-		return userMapper.searchByEmployeNumber(employeeNumber,companyId);
-	}
+
 }

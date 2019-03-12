@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 
 @Table(name = "user")
-public class UserEntity extends AbstractEntity {
+public class UserEntity extends AbstractEntity  {
 
 	@Column(name = "user_name")
 	private String userName;
@@ -17,6 +17,7 @@ public class UserEntity extends AbstractEntity {
 //	@Column(name = "parent_id")
 //	private Integer parentId;
 	private Integer role;
+
 
 
 	public String getUserName() {

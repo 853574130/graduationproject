@@ -9,20 +9,14 @@ import java.util.List;
 
 public interface UserMapper extends BasicMapper<UserEntity> {
 	@Select("select * from user")
-	@Results(id = "userMap", value = { @Result(column = "company_id", property = "companyId"),
-			@Result(column = "user_name", property = "userName"),
-			@Result(column = "user_account", property = "userAccount"),
-			@Result(column = "employe_id", property = "employeId"),
-			@Result(column = "parent_id", property = "parentId") })
+	@Results(id = "userMap", value = {
+			@Result(column = "user_name", property = "userName")})
 	List<UserEntity> tt();
 
-	@Select("select * from user where user_account=#{account}")
+	@Select("select * from user where user_name=#{account}")
 	@ResultMap("userMap")
 	UserEntity selectByAccount(String account);
 
 	@Update("update user set password = #{password} where id = #{id}")
 	void changePassword(@Param("id") Integer id, @Param("password") String password);
-
-	@Select("SELECT id FROM user WHERE employee_number = #{employeeNumber} AND company_id = #{companyId}")
-	UserInfo searchByEmployeNumber(@Param("employeeNumber") Integer employeeNumber, @Param("companyId") Integer companyId);
 }

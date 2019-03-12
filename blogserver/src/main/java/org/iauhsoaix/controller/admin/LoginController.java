@@ -46,6 +46,8 @@ public class LoginController implements LogCapability {
         try {
             UserInfo userInfo = userService.getLoginUser(account, password);
             request.getSession().setAttribute(LoginFilter.USER_SESSION, userInfo);
+            //这里应该是只返回权限信息，密码应该设为null
+            userInfo.setPassword("******");
             result = ResultUtils.success(userInfo);
         } catch (CommonBusinessException e) {
             result = ResultUtils.failure(e);
